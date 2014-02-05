@@ -38,24 +38,24 @@ class DayOfMonthTest extends AssertionsForJUnit {
 
     try {
       DayOfMonth(0)
-      fail
+      fail()
     } catch {
       case e: IllegalArgumentException => // success
-      case _ => fail
+      case _: Throwable => fail()
     }
     try {
       DayOfMonth(-1)
       fail
     } catch {
       case e: IllegalArgumentException => // success
-      case _ => fail
+      case _: Throwable => fail
     }
     try {
       DayOfMonth(32)
       fail
     } catch {
       case e: IllegalArgumentException => // success
-      case _ => fail
+      case _: Throwable => fail
     }
   }
 
@@ -74,21 +74,21 @@ class DayOfMonthTest extends AssertionsForJUnit {
       fail
     } catch {
       case e: IllegalArgumentException => // success
-      case _ => fail
+      case _: Throwable => fail
     }
     try {
       DayOfMonth(-1)
       fail
     } catch {
       case e: IllegalArgumentException => // success
-      case _ => fail
+      case _: Throwable => fail
     }
     try {
       DayOfMonth(32)
       fail;
     } catch {
       case e: IllegalArgumentException => // success
-      case _ => fail
+      case _: Throwable => fail
     }
   }
 
