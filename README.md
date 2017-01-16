@@ -39,3 +39,7 @@ resolvers += "Sonatype OSS Snapshot Repository" at "https://oss.sonatype.org/con
 
 libraryDependencies += "org.sisioh" %% "baseunits-scala" % "0.1.20-SNAPSHOT"
 ```
+
+## Usage
+
+TODO
