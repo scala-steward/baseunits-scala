@@ -15,6 +15,7 @@ Library is no longer active.
 
 Scala version of this library
 
+[![wercker status](https://app.wercker.com/status/2cab8411bd0b2af152face9d1190cf4c/s/master "wercker status")](https://app.wercker.com/project/byKey/2cab8411bd0b2af152face9d1190cf4c)
 [![Build Status](https://travis-ci.org/sisioh/baseunits-scala.png?branch=develop)](https://travis-ci.org/sisioh/baseunits-scala)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.sisioh/baseunits-scala_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.sisioh/baseunits-scala_2.11)
 [![Scaladoc](http://javadoc-badge.appspot.com/org.sisioh/baseunits-scala.svg?label=scaladoc)](http://javadoc-badge.appspot.com/org.sisioh/baseunits-scala_2.11)
