@@ -1,0 +1,29 @@
+box: ubuntu
+build:
+    steps:
+        - script:
+            name: install JDK
+            code: |
+                sudo add-apt-repository -y ppa:webupd8team/java
+                sudo apt-get update
+                echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
+                sudo apt-get install oracle-java8-installer
+        - script:
+            name: install sbt
+            code: |
+                mkdir bin
+                cd bin
+                wget https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/0.13.7/sbt-launch.jar
+                echo 'SBT_OPTS="-Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M"' > sbt
+                echo 'java $SBT_OPTS -jar `dirname $0`/sbt-launch.jar "$@"' >> sbt
+                chmod u+x sbt
+                export PATH=$PATH:`pwd`
+        - script:
+            name: test
+            code: sbt test
+        - script:
+            name: build
+            code: sbt dist
+        - script:
+            name: notify to wercker
+            code: bash <(curl -s https://codecov.io/bash)
