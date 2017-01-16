@@ -22,10 +22,7 @@ build:
                 export PATH=$PATH:`pwd`
         - script:
             name: test
-            code: sbt test
-        - script:
-            name: build
-            code: sbt dist
+            code: sbt -Dsbt.boot.directory=$WERCKER_CACHE_DIR/boot -Dsbt.ivy.home=$WERCKER_CACHE_DIR/ivy test
         - script:
             name: notify to wercker
             code: bash <(curl -s https://codecov.io/bash)
