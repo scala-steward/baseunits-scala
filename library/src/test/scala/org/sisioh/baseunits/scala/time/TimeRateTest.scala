@@ -23,14 +23,15 @@ import org.junit.Test
 import java.math.RoundingMode
 
 /**
- * [[TimeRate]]のテストクラス。
- */
+  * [[TimeRate]]のテストクラス。
+  */
 class TimeRateTest extends AssertionsForJUnit {
+
   /**
-   * [[TimeRate]]のインスタンス生成テスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeRate]]のインスタンス生成テスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test01_SimpleRate {
     val rate = TimeRate(100.00, Duration.minutes(1))
@@ -42,10 +43,10 @@ class TimeRateTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeRate#over(Duration)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeRate#over(Duration)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test02_Rounding {
     val rate = TimeRate(100.00, Duration.minutes(3))
@@ -59,10 +60,10 @@ class TimeRateTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeRate#over(Duration, RoundingMode)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeRate#over(Duration, RoundingMode)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test03_RoundingRate {
     val rate = TimeRate("100.00", Duration.minutes(3))
@@ -70,10 +71,10 @@ class TimeRateTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeRate#over(Duration, int, RoundingMode)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeRate#over(Duration, int, RoundingMode)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test04_RoundingScalingRate {
     val rate = TimeRate("100.00", Duration.minutes(3))
@@ -81,10 +82,10 @@ class TimeRateTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeRate#equals(Object)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeRate#equals(Object)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test05_Equals {
     val rate = TimeRate(11, Duration.days(2))
@@ -97,10 +98,10 @@ class TimeRateTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeRate#toString()]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeRate#toString()]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test06_toString {
     val rate = TimeRate(100.00, Duration.minutes(1))

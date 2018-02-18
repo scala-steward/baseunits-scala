@@ -22,26 +22,27 @@ import org.scalatest.junit.AssertionsForJUnit
 import org.junit.Test
 
 /**
- * `IntervalMap`のテストクラス。
- */
+  * `IntervalMap`のテストクラス。
+  */
 class IntervalMapTest extends AssertionsForJUnit {
+
   /**
-   * [[org.sisioh.baseunits.scala.intervals.IntervalMap]]に対する参照メソッドのテスト。
-   *
-   * <ul>
-   *   <li>[[IntervalMap#containsKey(Comparable)]]</li>
-   *   <li>[[IntervalMap#get(Comparable)]]</li>
-   * </ul>
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[org.sisioh.baseunits.scala.intervals.IntervalMap]]に対する参照メソッドのテスト。
+    *
+    * <ul>
+    *   <li>[[IntervalMap#containsKey(Comparable)]]</li>
+    *   <li>[[IntervalMap#get(Comparable)]]</li>
+    * </ul>
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test01_Lookup {
 
     var map = new LinearIntervalMap[Int, String]
     map += (Interval.closed(Limit(1), Limit(3)) -> "one-three")
     map += (Interval.closed(Limit(5), Limit(9)) -> "five-nine")
-    map += (Interval.open(Limit(9), Limit(12)) -> "ten-eleven")
+    map += (Interval.open(Limit(9), Limit(12))  -> "ten-eleven")
 
     assert(map.contains(Limit(0)) == false)
     assert(map.contains(Limit(1)) == true)
@@ -70,10 +71,10 @@ class IntervalMapTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[org.sisioh.baseunits.scala.intervals.IntervalMap#remove(Interval)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[org.sisioh.baseunits.scala.intervals.IntervalMap#remove(Interval)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test02_Remove {
     var map = new LinearIntervalMap[Int, String]()
@@ -87,16 +88,16 @@ class IntervalMapTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[org.sisioh.baseunits.scala.intervals.IntervalMap#put(Interval, Object)]]で割り当て区間が重複した場合、後勝ちになることを確認するテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[org.sisioh.baseunits.scala.intervals.IntervalMap#put(Interval, Object)]]で割り当て区間が重複した場合、後勝ちになることを確認するテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test03_ConstructionOverwriteOverlap {
     var map = new LinearIntervalMap[Int, String]()
     map += (Interval.closed(Limit(1), Limit(3)) -> "one-three")
     map += (Interval.closed(Limit(5), Limit(9)) -> "five-nine")
-    map += (Interval.open(Limit(9), Limit(12)) -> "ten-eleven")
+    map += (Interval.open(Limit(9), Limit(12))  -> "ten-eleven")
     assert(map.get(Limit(10)) == Some("ten-eleven"))
     assert(map.get(Limit(11)) == Some("ten-eleven"))
     assert(map.get(Limit(12)) == None)
@@ -111,16 +112,16 @@ class IntervalMapTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[org.sisioh.baseunits.scala.intervals.IntervalMap#put(Interval, Object)]]で割り当て区間が重複した場合、後勝ちになることを確認するテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[org.sisioh.baseunits.scala.intervals.IntervalMap#put(Interval, Object)]]で割り当て区間が重複した場合、後勝ちになることを確認するテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test04_ConstructionOverwriteMiddle {
     var map = new LinearIntervalMap[Int, String]()
     map += (Interval.closed(Limit(1), Limit(3)) -> "one-three")
     map += (Interval.closed(Limit(5), Limit(9)) -> "five-nine")
-    map += (Interval.open(Limit(9), Limit(12)) -> "ten-eleven")
+    map += (Interval.open(Limit(9), Limit(12))  -> "ten-eleven")
     assert(map.get(Limit(6)) == Some("five-nine"))
     assert(map.get(Limit(7)) == Some("five-nine"))
     assert(map.get(Limit(8)) == Some("five-nine"))
@@ -136,10 +137,10 @@ class IntervalMapTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[IntervalMap#put(Interval, Object)]]で割り当て区間が重複した場合、後勝ちになることを確認するテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[IntervalMap#put(Interval, Object)]]で割り当て区間が重複した場合、後勝ちになることを確認するテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test05_ConstructionOverwriteMultiple {
     var map = new LinearIntervalMap[Int, String]()

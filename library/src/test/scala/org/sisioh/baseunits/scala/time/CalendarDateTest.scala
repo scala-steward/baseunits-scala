@@ -22,11 +22,11 @@ import java.time.ZonedDateTime
 
 import org.scalatest.junit.AssertionsForJUnit
 import org.junit.Test
-import java.util.{ Calendar, TimeZone }
+import java.util.{Calendar, TimeZone}
 
 /**
- * `CalendarDate`のテストクラス。
- */
+  * `CalendarDate`のテストクラス。
+  */
 class CalendarDateTest extends AssertionsForJUnit {
   val feb17 = CalendarDate.from(2003, 2, 17, ZoneIds.Default)
 
@@ -41,20 +41,20 @@ class CalendarDateTest extends AssertionsForJUnit {
   val ct = TimeZone.getTimeZone("America/Chicago").toZoneId
 
   /**
-   * [[CalendarDate]]のインスタンスがシリアライズできるかどうか検証する。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarDate]]のインスタンスがシリアライズできるかどうか検証する。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test01_Serialization() {
     //SerializationTester.assertCanBeSerialized(feb17)
   }
 
   /**
-   * [[CalendarDate#isBefore(CalendarDate)]] と [[CalendarDate#isAfter(CalendarDate)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarDate#isBefore(CalendarDate)]] と [[CalendarDate#isAfter(CalendarDate)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test02_Comparison() {
     assert(feb17.isBefore(mar13) == true)
@@ -66,25 +66,25 @@ class CalendarDateTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[CalendarDate#startAsTimePoint(TimeZone)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarDate#startAsTimePoint(TimeZone)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test03_StartAsTimePoint() {
     val feb17StartAsCt = feb17.startAsTimePoint(ct)
-    val feb17Hour0Ct = TimePoint.atMidnight(2003, 2, 17, ct)
+    val feb17Hour0Ct   = TimePoint.atMidnight(2003, 2, 17, ct)
     assert(feb17StartAsCt == feb17Hour0Ct)
   }
 
   /**
-   * [[CalendarDate#asTimeInterval(TimeZone)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarDate#asTimeInterval(TimeZone)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test04_AsTimeInterval() {
-    val feb17AsCt = feb17.asTimeInterval(ct)
+    val feb17AsCt    = feb17.asTimeInterval(ct)
     val feb17Hour0Ct = TimePoint.atMidnight(2003, 2, 17, ct)
     val feb18Hour0Ct = TimePoint.atMidnight(2003, 2, 18, ct)
     assert(feb17AsCt.start.toValue == feb17Hour0Ct, "start")
@@ -92,10 +92,10 @@ class CalendarDateTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[CalendarDate#toString(String)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarDate#toString(String)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test05_FormattedString() {
     assert(feb17.toString("M/d/yyyy") == "2/17/2003")
@@ -104,10 +104,10 @@ class CalendarDateTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[CalendarDate#parse(String, String)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarDate#parse(String, String)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test06_FromFormattedString() {
     assert(CalendarDate.parse("2/17/2003", "M/d/yyyy", ZoneIds.Default) == (feb17))
@@ -116,22 +116,22 @@ class CalendarDateTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[CalendarDate#from(TimePoint, TimeZone)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarDate#from(TimePoint, TimeZone)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test07_FromTimePoint() {
     val feb18Hour0Ct = TimePoint.atMidnight(2003, 2, 18, gmt.toZoneId)
-    val mapped = CalendarDate.from(feb18Hour0Ct)
+    val mapped       = CalendarDate.from(feb18Hour0Ct)
     assert(mapped == CalendarDate.from(2003, 2, 18))
   }
 
   /**
-   * [[CalendarDate#equals(Object)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarDate#equals(Object)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test08_Equals() {
     assert(feb17.equals(feb17) == (true))
@@ -139,10 +139,10 @@ class CalendarDateTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[CalendarDate#dayOfWeek()]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarDate#dayOfWeek()]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test09_DayOfWeek() {
     val date1 = CalendarDate.from(2004, 11, 6)
@@ -152,10 +152,10 @@ class CalendarDateTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[CalendarDate#nextDay()]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarDate#nextDay()]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test10_NextDay() {
     val feb28_2004 = CalendarDate.from(2004, 2, 28)
@@ -164,10 +164,10 @@ class CalendarDateTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[CalendarDate#previousDay()]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarDate#previousDay()]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test11_PreviousDay() {
     val mar1_2004 = CalendarDate.from(2004, 3, 1)
@@ -176,35 +176,35 @@ class CalendarDateTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[CalendarDate#asMonthInterval()]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarDate#asMonthInterval()]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test12_Month() {
     val nov6_2004 = CalendarDate.from(2004, 11, 6, ZoneIds.Default)
-    val nov2004 = CalendarInterval.inclusive(2004, 11, 1, 2004, 11, 30, ZoneIds.Default)
+    val nov2004   = CalendarInterval.inclusive(2004, 11, 1, 2004, 11, 30, ZoneIds.Default)
     assert(nov6_2004.asMonthInterval == nov2004)
 
     val dec6_2004 = CalendarDate.from(2004, 12, 6, ZoneIds.Default)
-    val dec2004 = CalendarInterval.inclusive(2004, 12, 1, 2004, 12, 31, ZoneIds.Default)
+    val dec2004   = CalendarInterval.inclusive(2004, 12, 1, 2004, 12, 31, ZoneIds.Default)
     assert(dec6_2004.asMonthInterval == dec2004)
 
     val feb9_2004 = CalendarDate.from(2004, 2, 9, ZoneIds.Default)
-    val feb2004 = CalendarInterval.inclusive(2004, 2, 1, 2004, 2, 29, ZoneIds.Default)
+    val feb2004   = CalendarInterval.inclusive(2004, 2, 1, 2004, 2, 29, ZoneIds.Default)
     assert(feb9_2004.asMonthInterval == feb2004)
 
     val feb9_2003 = CalendarDate.from(2003, 2, 9, ZoneIds.Default)
-    val feb2003 = CalendarInterval.inclusive(2003, 2, 1, 2003, 2, 28, ZoneIds.Default)
+    val feb2003   = CalendarInterval.inclusive(2003, 2, 1, 2003, 2, 28, ZoneIds.Default)
     assert(feb9_2003.asMonthInterval == feb2003)
 
   }
 
   /**
-   * [[CalendarDate#toString()]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarDate#toString()]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test13_ToString() {
     val date = CalendarDate.from(2004, 5, 28, ZoneIds.Default)
@@ -212,10 +212,10 @@ class CalendarDateTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[CalendarDate#asJavaCalendarUniversalZoneMidnight()]]のテスト。（内部API）
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarDate#asJavaCalendarUniversalZoneMidnight()]]のテスト。（内部API）
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test14_ConversionToJavaUtil() {
     val expected = Calendar.getInstance(gmt)
@@ -228,7 +228,7 @@ class CalendarDateTest extends AssertionsForJUnit {
     expected.set(Calendar.SECOND, 0)
     expected.set(Calendar.MILLISECOND, 0)
 
-    val date = CalendarDate.from(1969, 7, 20, gmt.toZoneId)
+    val date   = CalendarDate.from(1969, 7, 20, gmt.toZoneId)
     val actual = date.asJavaCalendarOnMidnight
     assert(actual.get(Calendar.HOUR) == expected.get(Calendar.HOUR))
     assert(actual.get(Calendar.AM_PM) == expected.get(Calendar.AM_PM))
@@ -240,16 +240,16 @@ class CalendarDateTest extends AssertionsForJUnit {
   def test15_ConversionToJavaUtil() {
     val expected = ZonedDateTime.of(1969, 7, 20, 0, 0, 0, 0, gmt.toZoneId)
 
-    val date = CalendarDate.from(1969, 7, 20, gmt.toZoneId)
+    val date   = CalendarDate.from(1969, 7, 20, gmt.toZoneId)
     val actual = date.asJavaZonedDateTimeOnMidnight(gmt.toZoneId)
     assert(actual == expected)
   }
 
   /**
-   * [[CalendarDate#plusDays(int)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarDate#plusDays(int)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test16_DaysAdd() {
     assert(may1.plusDays(19) == may20)

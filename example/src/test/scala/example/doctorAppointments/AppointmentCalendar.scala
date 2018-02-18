@@ -22,7 +22,8 @@ import java.time.ZoneId
 
 import org.sisioh.baseunits.scala.time.CalendarDate
 
-class AppointmentCalendar private[doctorAppointments] (private[doctorAppointments] val defaultZoneId: ZoneId) {
+class AppointmentCalendar private[doctorAppointments] (
+    private[doctorAppointments] val defaultZoneId: ZoneId) {
 
   var events = Set.empty[Appointment]
 

@@ -22,14 +22,15 @@ import org.scalatest.junit.AssertionsForJUnit
 import org.junit.Test
 
 /**
- * `Allotment`のテストクラス。
- */
+  * `Allotment`のテストクラス。
+  */
 class AllotmentTest extends AssertionsForJUnit {
+
   /**
-   * 等価性検証。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * 等価性検証。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test01_Equals {
     val abc123dollars = Allotment("ABC", Money.dollars(1.23))
@@ -40,10 +41,10 @@ class AllotmentTest extends AssertionsForJUnit {
   }
 
   /**
-   * 正負転換検証。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * 正負転換検証。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test02_Negated {
     val abc123dollars = Allotment("ABC", Money.dollars(1.23))

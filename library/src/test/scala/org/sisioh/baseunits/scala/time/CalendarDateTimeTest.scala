@@ -23,8 +23,8 @@ import java.util.TimeZone
 import org.junit.Test
 
 /**
- * [[CalendarDateTime]]のテストクラス。
- */
+  * [[CalendarDateTime]]のテストクラス。
+  */
 class CalendarDateTimeTest extends AssertionsForJUnit {
   val feb17_1_23 = CalendarDateTime.from(2003, 2, 17, 1, 23)
 
@@ -37,20 +37,20 @@ class CalendarDateTimeTest extends AssertionsForJUnit {
   val ct = TimeZone.getTimeZone("America/Chicago")
 
   /**
-   * [[CalendarDateTime]]のインスタンスがシリアライズできるかどうか検証する。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarDateTime]]のインスタンスがシリアライズできるかどうか検証する。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test01_Serialization {
     //SerializationTester.assertCanBeSerialized(feb17_1_23)
   }
 
   /**
-   * [[CalendarDateTime#isBefore(CalendarDateTime)]] と [[CalendarDateTime#isAfter(CalendarDateTime)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarDateTime#isBefore(CalendarDateTime)]] と [[CalendarDateTime#isAfter(CalendarDateTime)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test02_Comparison {
     assert(feb17_1_23.isBefore(feb17_1_23) == false)
@@ -81,10 +81,10 @@ class CalendarDateTimeTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[CalendarDateTime#asTimePoint(TimeZone)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarDateTime#asTimePoint(TimeZone)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test03_StartAsTimePoint {
     val feb17_1_23AsCt = feb17_1_23.asTimePoint(ct.toZoneId)
@@ -92,10 +92,10 @@ class CalendarDateTimeTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[CalendarDateTime#toString(String, TimeZone)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarDateTime#toString(String, TimeZone)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test05_FormattedString {
     val zoneId = TimeZone.getTimeZone("Universal").toZoneId
@@ -105,28 +105,33 @@ class CalendarDateTimeTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[CalendarDateTime#parse(String, String)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarDateTime#parse(String, String)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test06_FromFormattedString {
-    assert(CalendarDateTime.parse("2/17/2003 01:23", "M/d/yyyy HH:mm", ZoneIds.Default) == feb17_1_23)
+    assert(
+      CalendarDateTime.parse("2/17/2003 01:23", "M/d/yyyy HH:mm", ZoneIds.Default) == feb17_1_23)
     //Now a nonsense pattern, to make sure it isn't succeeding by accident.
-    assert(CalendarDateTime.parse("#17-03/02 2003, 01:23", "#d-yy/MM yyyy, HH:mm", ZoneIds.Default) == feb17_1_23)
+    assert(
+      CalendarDateTime
+        .parse("#17-03/02 2003, 01:23", "#d-yy/MM yyyy, HH:mm", ZoneIds.Default) == feb17_1_23)
   }
 
   /**
-   * [[CalendarDateTime#equals(Object)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarDateTime#equals(Object)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test08_Equals {
     assert(feb17_1_23.equals(feb17_1_23))
     assert(!feb17_1_23.equals(feb17_3_45))
     assert(!feb17_1_23.equals(mar13_3_45))
-    assert(new CalendarDateTime(CalendarDate.from(2003, 2, 17, ZoneIds.Default), TimeOfDay.from(1, 23)).equals(feb17_1_23))
+    assert(
+      new CalendarDateTime(CalendarDate.from(2003, 2, 17, ZoneIds.Default), TimeOfDay.from(1, 23))
+        .equals(feb17_1_23))
     //    assert(new CalendarMinute(CalendarDate.from(2003, 2, 17),
     //      TimeOfDay.from(1, 23)) {
     //
@@ -140,11 +145,11 @@ class CalendarDateTimeTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[CalendarDateTime#breachEncapsulationOfDate()]]
-   * [[CalendarDateTime#breachEncapsulationOfTime()]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarDateTime#breachEncapsulationOfDate()]]
+    * [[CalendarDateTime#breachEncapsulationOfTime()]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test09_breachEncapsulationOf {
     assert(feb17_1_23.date == CalendarDate.from(2003, 2, 17))
@@ -152,10 +157,10 @@ class CalendarDateTimeTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[CalendarDateTime#toString()]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarDateTime#toString()]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test13_ToString {
     val date = CalendarDateTime.from(2004, 5, 28, 23, 21)
@@ -164,7 +169,7 @@ class CalendarDateTimeTest extends AssertionsForJUnit {
 
   @Test
   def test14_equals_date {
-    val date = CalendarDate.from(2004, 5, 28)
+    val date     = CalendarDate.from(2004, 5, 28)
     val dateTime = CalendarDateTime.from(date, TimeOfDay.from(1, 1))
     assert(dateTime == date)
 

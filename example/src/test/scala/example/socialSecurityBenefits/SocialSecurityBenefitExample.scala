@@ -19,11 +19,11 @@
 package example.socialSecurityBenefits
 
 import org.junit.Assert._
-import org.junit.{ Ignore, Test }
+import org.junit.{Ignore, Test}
 import org.scalatest.Assertions
 import org.sisioh.baseunits.scala.intervals.Limit
 import org.sisioh.baseunits.scala.money.Money
-import org.sisioh.baseunits.scala.time.{ CalendarDate, CalendarInterval, ZoneIds }
+import org.sisioh.baseunits.scala.time.{CalendarDate, CalendarInterval, ZoneIds}
 import org.sisioh.baseunits.scala.util.Ratio
 
 class SocialSecurityBenefitExample extends Assertions {
@@ -39,19 +39,19 @@ class SocialSecurityBenefitExample extends Assertions {
    */
 
   /**
-   * Example: (Simplified exerpt from
-   * http://www.ssa.gov/OP_Home/cfr20/404/404-0439.htm) Worker is entitled to
-   * an old-age insurance benefit of $200 payable for October, which is
-   * apportioned as follows after rounding each share down to the nearest
-   * dollar. See regulation �404.304(f).
-   *
-   * Fraction Benefit Worker 2/3 $133 Spouse 1/3 66 Total 199
-   */
+    * Example: (Simplified exerpt from
+    * http://www.ssa.gov/OP_Home/cfr20/404/404-0439.htm) Worker is entitled to
+    * an old-age insurance benefit of $200 payable for October, which is
+    * apportioned as follows after rounding each share down to the nearest
+    * dollar. See regulation �404.304(f).
+    *
+    * Fraction Benefit Worker 2/3 $133 Spouse 1/3 66 Total 199
+    */
   @Test
   def testArbitraryRoundingRuleInDeductionsFromFamilyBenefits {
-    val benefit = Money.dollars(200)
-    val workerShare = Ratio(2, 3)
-    val spouseShare = Ratio(1, 3)
+    val benefit       = Money.dollars(200)
+    val workerShare   = Ratio(2, 3)
+    val spouseShare   = Ratio(1, 3)
     val roundingScale = 0
     val workerBenefit = benefit.applying(workerShare, roundingScale, BigDecimal.RoundingMode.DOWN)
     val spouseBenefit = benefit.applying(spouseShare, roundingScale, BigDecimal.RoundingMode.DOWN)
@@ -60,8 +60,8 @@ class SocialSecurityBenefitExample extends Assertions {
   }
 
   /**
-   * Example.
-   */
+    * Example.
+    */
   @Test
   @Ignore
   def testExcessEarnings {
@@ -75,7 +75,7 @@ class SocialSecurityBenefitExample extends Assertions {
      */
 
     // Does beneficiary attain age 72 during the benefit year 1972?
-    val y1979 = CalendarInterval.year(1979, ZoneIds.Default)
+    val y1979      = CalendarInterval.year(1979, ZoneIds.Default)
     val birthday72 = CalendarDate.from(1979, 7, 15)
     assertTrue(y1979.includes(Limit(birthday72)))
 
@@ -94,7 +94,7 @@ class SocialSecurityBenefitExample extends Assertions {
     //		assertEquals(Money.dollars(6000), netEarningsPriorToMonthOfTurning72)
 
     val exemptMonthlyEarnings = Money.dollars(375)
-    val exemptAnnualEarnings = exemptMonthlyEarnings.times(12)
+    val exemptAnnualEarnings  = exemptMonthlyEarnings.times(12)
     assert(Money.dollars(4500) == exemptAnnualEarnings)
     //		Money annualExcessEarnings = earningsFor1979.minus(exemptAnnualEarnings)
     //
