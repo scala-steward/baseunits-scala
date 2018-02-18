@@ -67,6 +67,7 @@ val commonSettings = Seq(
           </developer>
         </developers>
   ),
+  publishTo := sonatypePublishTo.value,
   credentials := {
     val ivyCredentials = (baseDirectory in LocalRootProject).value / ".credentials"
     Credentials(ivyCredentials) :: Nil
