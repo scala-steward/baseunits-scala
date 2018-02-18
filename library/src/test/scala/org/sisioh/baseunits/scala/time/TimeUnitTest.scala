@@ -24,34 +24,35 @@ import org.junit.Test
 import org.scalatest.Assertions
 
 /**
- * {@link TimeUnit}のテストクラス。
- * @author j5ik2o
- */
+  * {@link TimeUnit}のテストクラス。
+  * @author j5ik2o
+  */
 class TimeUnitTest extends Assertions {
+
   /**
-   * [[TimeUnit]]のインスタンスがシリアライズできるかどうか検証する。
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeUnit]]のインスタンスがシリアライズできるかどうか検証する。
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test01_Serialization() {
     //SerializationTester.assertCanBeSerialized(TimeUnit.month);
   }
 
   /**
-   * [[TimeUnit# t o S t r i n g ( )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeUnit# t o S t r i n g ( )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test02_ToString() {
     assert(TimeUnit.Month.name == "month")
   }
 
   /**
-   * [[TimeUnit# i s C o n v e r t i b l e T o M i l l i s e c o n d s ( )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeUnit# i s C o n v e r t i b l e T o M i l l i s e c o n d s ( )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test03_ConvertibleToMilliseconds() {
     assert(TimeUnit.Millisecond.isConvertibleToMilliseconds == true)
@@ -63,10 +64,10 @@ class TimeUnitTest extends Assertions {
   }
 
   /**
-   * [[TimeUnit# c o m p a r e T o ( T i m e U n i t )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeUnit# c o m p a r e T o ( T i m e U n i t )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test04_Comparison() {
     assert(TimeUnit.Hour.compareTo(TimeUnit.Hour) == 0)
@@ -85,10 +86,10 @@ class TimeUnitTest extends Assertions {
   }
 
   /**
-   * [[TimeUnit# j a v a C a l e n d a r C o n s t a n t F o r B a s e T y p e ( )]]のテスト。（内部API）
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeUnit# j a v a C a l e n d a r C o n s t a n t F o r B a s e T y p e ( )]]のテスト。（内部API）
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test05_JavaCalendarConstantForBaseType() {
     assert(TimeUnit.Millisecond.javaCalendarConstantForBaseType == Calendar.MILLISECOND)
@@ -101,10 +102,10 @@ class TimeUnitTest extends Assertions {
   }
 
   /**
-   * [[TimeUnit# i s C o n v e r t i b l e T o ( T i m e U n i t )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeUnit# i s C o n v e r t i b l e T o ( T i m e U n i t )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test06_IsConvertableTo() {
     assert(TimeUnit.Hour.isConvertibleTo(TimeUnit.Minute) == true)
@@ -116,10 +117,10 @@ class TimeUnitTest extends Assertions {
   }
 
   /**
-   * [[TimeUnit# n e x t F i n e r U n i t ( )]]のテスト。（内部API）
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeUnit# n e x t F i n e r U n i t ( )]]のテスト。（内部API）
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test07_NextFinerUnit() {
     assert(TimeUnit.Hour.nextFinerUnit == Some(TimeUnit.Minute))

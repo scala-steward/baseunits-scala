@@ -24,8 +24,8 @@ import org.scalatest.junit.AssertionsForJUnit
 import scala.collection.mutable.ArrayBuffer
 
 /**
- * `IntervalSeq`のテストクラス。
- */
+  * `IntervalSeq`のテストクラス。
+  */
 class IntervalSeqTest extends AssertionsForJUnit {
 
   private val c5_10c = Interval.closed(Limit(5), Limit(10))
@@ -53,10 +53,10 @@ class IntervalSeqTest extends AssertionsForJUnit {
   private val all = Interval.open(Limitless[Int], Limitless[Int])
 
   /**
-   * [[org.sisioh.baseunits.scala.intervals.IntervalSeq# i t e r a t o r]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[org.sisioh.baseunits.scala.intervals.IntervalSeq# i t e r a t o r]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test01_Iterate {
     var intervalSequence = new IntervalSeq[Int]
@@ -78,15 +78,15 @@ class IntervalSeqTest extends AssertionsForJUnit {
     } catch {
       case e: NoSuchElementException =>
       // success
-      case _: Throwable              => fail()
+      case _: Throwable => fail()
     }
   }
 
   /**
-   * [[org.sisioh.baseunits.scala.intervals.IntervalSeq# a d d ( I n t e r v a l )]]が順不同で行われた場合の[[IntervalSequence]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[org.sisioh.baseunits.scala.intervals.IntervalSeq# a d d ( I n t e r v a l )]]が順不同で行われた場合の[[IntervalSequence]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test02_InsertedOutOfOrder {
     var intervalSequence = new IntervalSeq[Int]
@@ -109,10 +109,10 @@ class IntervalSeqTest extends AssertionsForJUnit {
   }
 
   /**
-   * 重なる区間を含んだ[[org.sisioh.baseunits.scala.intervals.IntervalSeq]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * 重なる区間を含んだ[[org.sisioh.baseunits.scala.intervals.IntervalSeq]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test03_Overlapping {
     var intervalSequence = new IntervalSeq[Int]()
@@ -134,10 +134,10 @@ class IntervalSeqTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[org.sisioh.baseunits.scala.intervals.IntervalSeq# i n t e r s e c t i o n s]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[org.sisioh.baseunits.scala.intervals.IntervalSeq# i n t e r s e c t i o n s]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test04_Intersections {
     var intervalSequence = IntervalSeq[Int]()
@@ -161,10 +161,10 @@ class IntervalSeqTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[org.sisioh.baseunits.scala.intervals.IntervalSeq# g a p s]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[org.sisioh.baseunits.scala.intervals.IntervalSeq# g a p s]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test05_Gaps {
     var intervalSeq = IntervalSeq[Int]()
@@ -185,15 +185,15 @@ class IntervalSeqTest extends AssertionsForJUnit {
     } catch {
       case e: NoSuchElementException =>
       // success
-      case _: Throwable              => fail()
+      case _: Throwable => fail()
     }
   }
 
   /**
-   * [[org.sisioh.baseunits.scala.intervals.IntervalSeq# e x t e n t]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[org.sisioh.baseunits.scala.intervals.IntervalSeq# e x t e n t]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test06_Extent {
     val intervals = ArrayBuffer.empty[Interval[Int]]

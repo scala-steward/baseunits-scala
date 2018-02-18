@@ -21,11 +21,11 @@ package org.sisioh.baseunits.scala.time
 import org.scalatest.junit.AssertionsForJUnit
 import java.util.TimeZone
 import org.junit.Test
-import org.sisioh.baseunits.scala.intervals.{ Limitless, Limit }
+import org.sisioh.baseunits.scala.intervals.{Limitless, Limit}
 
 /**
- * `CalendarInterval`のテストクラス。
- */
+  * `CalendarInterval`のテストクラス。
+  */
 class CalendarIntervalTest extends AssertionsForJUnit {
 
   val may1 = CalendarDate.from(2004, 5, 1)
@@ -49,10 +49,10 @@ class CalendarIntervalTest extends AssertionsForJUnit {
   val ct = TimeZone.getTimeZone("America/Chicago").toZoneId
 
   /**
-   * [[CalendarInterval]]のインスタンスがシリアライズできるかどうか検証する。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[CalendarInterval]]のインスタンスがシリアライズできるかどうか検証する。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   //@Test
   //def test01_Serialization {
   //SerializationTester.assertCanBeSerialized(may)
@@ -109,7 +109,7 @@ class CalendarIntervalTest extends AssertionsForJUnit {
 
   @Test
   def test06_SubintervalIterator {
-    val may1_3 = CalendarInterval.inclusive(Limit(may1), Limit(may3))
+    val may1_3   = CalendarInterval.inclusive(Limit(may1), Limit(may3))
     var iterator = may1_3.subintervalIterator(Duration.days(1))
     assert(iterator.hasNext == true)
     assert(iterator.next.start == may1)
@@ -169,8 +169,8 @@ class CalendarIntervalTest extends AssertionsForJUnit {
 
   @Test
   def test08_Complements() {
-    val may1Onward = CalendarInterval.inclusive(Limit(may1), Limitless[CalendarDate])
-    val may2Onward = CalendarInterval.inclusive(Limit(may2), Limitless[CalendarDate])
+    val may1Onward     = CalendarInterval.inclusive(Limit(may1), Limitless[CalendarDate])
+    val may2Onward     = CalendarInterval.inclusive(Limit(may2), Limitless[CalendarDate])
     val complementList = may2Onward.complementRelativeTo(may1Onward)
     assert(complementList.size == 1)
 
@@ -200,11 +200,11 @@ class CalendarIntervalTest extends AssertionsForJUnit {
 
   @Test
   def test12_StartingFrom {
-    val d1 = CalendarInterval.startingFrom(Limit(may1), Duration.days(2))
+    val d1        = CalendarInterval.startingFrom(Limit(may1), Duration.days(2))
     val expected1 = CalendarInterval.inclusive(2004, 5, 1, 2004, 5, 2, ZoneIds.Default)
     assert(d1 == expected1)
 
-    val d2 = CalendarInterval.startingFrom(Limit(may1), Duration.minutes(2))
+    val d2        = CalendarInterval.startingFrom(Limit(may1), Duration.minutes(2))
     val expected2 = CalendarInterval.inclusive(2004, 5, 1, 2004, 5, 1, ZoneIds.Default)
     assert(d2 == expected2)
   }

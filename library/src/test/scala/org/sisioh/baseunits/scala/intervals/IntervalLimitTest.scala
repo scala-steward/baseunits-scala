@@ -24,8 +24,8 @@ import collection.mutable.ListBuffer
 import util.Random
 
 /**
- * `IntervalLimit`のテストクラス。
- */
+  * `IntervalLimit`のテストクラス。
+  */
 class IntervalLimitTest extends AssertionsForJUnit {
   @Test
   def test01_Equals {
@@ -58,15 +58,15 @@ class IntervalLimitTest extends AssertionsForJUnit {
 
   @Test
   def test02_compareTo {
-    val lowerInf = IntervalLimit.lower(false, Limitless[Int])
-    val upperInf = IntervalLimit.upper(false, Limitless[Int])
-    val lowerOpen2 = IntervalLimit.lower(false, Limit(2))
+    val lowerInf    = IntervalLimit.lower(false, Limitless[Int])
+    val upperInf    = IntervalLimit.upper(false, Limitless[Int])
+    val lowerOpen2  = IntervalLimit.lower(false, Limit(2))
     val lowerClose2 = IntervalLimit.lower(true, Limit(2))
-    val lowerOpen3 = IntervalLimit.lower(false, Limit(3))
+    val lowerOpen3  = IntervalLimit.lower(false, Limit(3))
     val lowerClose3 = IntervalLimit.lower(true, Limit(3))
-    val upperOpen5 = IntervalLimit.upper(false, Limit(5))
+    val upperOpen5  = IntervalLimit.upper(false, Limit(5))
     val upperClose5 = IntervalLimit.upper(true, Limit(5))
-    val upperOpen6 = IntervalLimit.upper(false, Limit(6))
+    val upperOpen6  = IntervalLimit.upper(false, Limit(6))
     val upperClose6 = IntervalLimit.upper(true, Limit(6))
 
     // 無限同士比較
