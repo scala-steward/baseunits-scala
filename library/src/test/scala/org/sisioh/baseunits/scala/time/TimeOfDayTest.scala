@@ -23,8 +23,8 @@ import java.util.TimeZone
 import org.junit.Test
 
 /**
- * `TimeOfDay`のテストクラス。
- */
+  * `TimeOfDay`のテストクラス。
+  */
 class TimeOfDayTest extends AssertionsForJUnit {
 
   val CST = TimeZone.getTimeZone("CST")
@@ -44,10 +44,10 @@ class TimeOfDayTest extends AssertionsForJUnit {
   val tenMinutesBeforeMidnight = TimeOfDay.from(23, 50)
 
   /**
-   * [[TimeOfDay#on(CalendarDate)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeOfDay#on(CalendarDate)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test01_OnStartOfDay {
     val feb17AtStartOfDay = CalendarDateTime.from(2006, 2, 17, 0, 0)
@@ -55,10 +55,10 @@ class TimeOfDayTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeOfDay#on(CalendarDate)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeOfDay#on(CalendarDate)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test02_OnMiddleOfDay {
     val feb17AtMiddleOfDay = CalendarDateTime.from(2006, 2, 17, 12, 0)
@@ -66,10 +66,10 @@ class TimeOfDayTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeOfDay#on(CalendarDate)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeOfDay#on(CalendarDate)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test03_OnEndOfDay {
     val feb17AtEndOfDay = CalendarDateTime.from(2006, 2, 17, 23, 58)
@@ -77,10 +77,10 @@ class TimeOfDayTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeOfDay#equals(Object)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeOfDay#equals(Object)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test04_Equals {
     assert(midnight.equals(TimeOfDay.from(0, 0)) == true)
@@ -98,10 +98,10 @@ class TimeOfDayTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeOfDay#hashCode]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeOfDay#hashCode]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test05_HashCode {
     assert(midnight.hashCode == TimeOfDay.from(0, 0).hashCode)
@@ -112,34 +112,37 @@ class TimeOfDayTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeOfDay#isAfter(TimeOfDay)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeOfDay#isAfter(TimeOfDay)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test06_AfterWithEarlierTimeOfDay {
-    assert(twoMinutesBeforeMidnight.isAfter(midnight) == true, "expected twoMinutesBeforeMidnight to be after midnight")
+    assert(twoMinutesBeforeMidnight.isAfter(midnight) == true,
+           "expected twoMinutesBeforeMidnight to be after midnight")
     assert(afternoon.isAfter(morning) == true, "expected afternoon to be after morning")
     assert(noon.isAfter(midnight) == true, "expected noon to be after midnight")
   }
 
   /**
-   * [[TimeOfDay#isAfter(TimeOfDay)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeOfDay#isAfter(TimeOfDay)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test07_AfterWithLaterTimeOfDay {
-    assert(midnight.isAfter(twoMinutesBeforeMidnight) == false, "expected midnight not after twoMinutesBeforeMidnight")
+    assert(midnight.isAfter(twoMinutesBeforeMidnight) == false,
+           "expected midnight not after twoMinutesBeforeMidnight")
     assert(morning.isAfter(afternoon) == false, "expected morning not after afternoon")
-    assert(noon.isAfter(twoMinutesBeforeMidnight) == false, "expected noon not after twoMinutesBeforeMidnight")
+    assert(noon.isAfter(twoMinutesBeforeMidnight) == false,
+           "expected noon not after twoMinutesBeforeMidnight")
   }
 
   /**
-   * [[TimeOfDay#isAfter(TimeOfDay)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeOfDay#isAfter(TimeOfDay)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test08_AfterWithSameTimeOfDay {
     assert(midnight.isAfter(midnight) == false, "expected midnight not after midnight")
@@ -149,34 +152,37 @@ class TimeOfDayTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeOfDay#isBefore(TimeOfDay)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeOfDay#isBefore(TimeOfDay)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test09_BeforeWithEarlierTimeOfDay {
-    assert(twoMinutesBeforeMidnight.isBefore(midnight) == false, "expected twoMinutesBeforeMidnight not after midnight")
+    assert(twoMinutesBeforeMidnight.isBefore(midnight) == false,
+           "expected twoMinutesBeforeMidnight not after midnight")
     assert(afternoon.isBefore(morning) == false, "expected afternoon not after morning")
     assert(noon.isBefore(midnight) == false, "expected noon not after midnight")
   }
 
   /**
-   * [[TimeOfDay#isBefore(TimeOfDay)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeOfDay#isBefore(TimeOfDay)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test10_BeforeWithLaterTimeOfDay() {
-    assert(midnight.isBefore(twoMinutesBeforeMidnight), "expected midnight not after twoMinutesBeforeMidnight")
+    assert(midnight.isBefore(twoMinutesBeforeMidnight),
+           "expected midnight not after twoMinutesBeforeMidnight")
     assert(morning.isBefore(afternoon), "expected morning not after afternoon")
-    assert(noon.isBefore(twoMinutesBeforeMidnight), "expected noon not after twoMinutesBeforeMidnight")
+    assert(noon.isBefore(twoMinutesBeforeMidnight),
+           "expected noon not after twoMinutesBeforeMidnight")
   }
 
   /**
-   * [[TimeOfDay#isBefore(TimeOfDay)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeOfDay#isBefore(TimeOfDay)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test11_BeforeWithSameTimeOfDay() {
     assert(!midnight.isBefore(midnight), "expected midnight not after midnight")
@@ -186,10 +192,10 @@ class TimeOfDayTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeOfDay#breachEncapsulationOfHour]]のテスト。（内部API）
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeOfDay#breachEncapsulationOfHour]]のテスト。（内部API）
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test12_GetHour {
     assert(midnight.hour == HourOfDay(0))
@@ -200,10 +206,10 @@ class TimeOfDayTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeOfDay#breachEncapsulationOfMinute]]のテスト。（内部API）
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeOfDay#breachEncapsulationOfMinute]]のテスト。（内部API）
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test13_GetMinute {
     assert(midnight.minute == MinuteOfHour(0))
@@ -214,14 +220,14 @@ class TimeOfDayTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeOfDay#asTimePointGiven(CalendarDate, TimeZone)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeOfDay#asTimePointGiven(CalendarDate, TimeZone)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test14_AsTimePoint {
-    val fiveFifteen = TimeOfDay.from(17, 15)
-    val mayEleventh = CalendarDate.from(2006, 5, 11)
+    val fiveFifteen              = TimeOfDay.from(17, 15)
+    val mayEleventh              = CalendarDate.from(2006, 5, 11)
     val mayEleventhAtFiveFifteen = fiveFifteen.asTimePointGiven(mayEleventh, CST.toZoneId)
     assert(mayEleventhAtFiveFifteen == TimePoint.at(2006, 5, 11, 17, 15, 0, 0, CST.toZoneId))
   }

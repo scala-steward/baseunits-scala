@@ -24,13 +24,14 @@ import org.junit.Test
 import scala.collection.mutable.ArrayBuffer
 
 /**
- * `MoneyFan`のテストクラス。
- */
+  * `MoneyFan`のテストクラス。
+  */
 class MoneyFanTest extends AssertionsForJUnit {
+
   /**
-   * Three roommates are sharing expenses in a house.
-   * @throws Exception 例外が発生した場合
-   */
+    * Three roommates are sharing expenses in a house.
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test01_RoommateExample {
     //apportionment, assignment, attribution, post, assignation, allotment, slice
@@ -103,10 +104,10 @@ class MoneyFanTest extends AssertionsForJUnit {
   }
 
   /**
-   * {@link MoneyFan#equals(Object)}のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * {@link MoneyFan#equals(Object)}のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test02_Equals {
     var c = ArrayBuffer.empty[Allotment[String]]
@@ -130,16 +131,16 @@ class MoneyFanTest extends AssertionsForJUnit {
   }
 
   /**
-   * {@link MoneyFan#plus(MoneyFan)}のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * {@link MoneyFan#plus(MoneyFan)}のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test03_Plus {
 
     val jack17 = MoneyFan(Allotment("Jack", Money.dollars(17)))
     val jill13 = MoneyFan(Allotment("Jill", Money.dollars(13)))
-    var c = ArrayBuffer.empty[Allotment[String]]
+    var c      = ArrayBuffer.empty[Allotment[String]]
     c += Allotment("Jack", Money.dollars(17))
     c += Allotment("Jill", Money.dollars(13))
     val jack17Jill13 = MoneyFan(c.toSet)
@@ -156,10 +157,10 @@ class MoneyFanTest extends AssertionsForJUnit {
   }
 
   /**
-   * {@link MoneyFan#negated()}のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * {@link MoneyFan#negated()}のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test04_Negation {
     var c = ArrayBuffer.empty[Allotment[String]]
@@ -176,14 +177,14 @@ class MoneyFanTest extends AssertionsForJUnit {
   }
 
   /**
-   * {@link MoneyFan#minus(MoneyFan)}のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * {@link MoneyFan#minus(MoneyFan)}のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test05_Minus {
-    val jack = MoneyFan(Allotment("Jack", Money.dollars(285.67)))
-    val lessJack = MoneyFan(Allotment("Jack", Money.dollars(10.00)))
+    val jack           = MoneyFan(Allotment("Jack", Money.dollars(285.67)))
+    val lessJack       = MoneyFan(Allotment("Jack", Money.dollars(10.00)))
     val differenceJack = MoneyFan(Allotment("Jack", Money.dollars(275.67)))
 
     assert(jack.minus(lessJack) == differenceJack)

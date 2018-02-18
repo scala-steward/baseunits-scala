@@ -23,28 +23,28 @@ import java.util.TimeZone
 import org.hamcrest.CoreMatchers.is
 import org.junit.Assert.assertThat
 import org.junit.Test
-import org.scalatest.{ Assertions, Matchers }
+import org.scalatest.{Assertions, Matchers}
 import org.sisioh.baseunits.scala.time._
 
 /**
- * Example.
- */
+  * Example.
+  */
 class RecurringAppointmentScenario extends Assertions with Matchers {
 
   val HonoluluTime = TimeZone.getTimeZone("Pacific/Honolulu").toZoneId
 
   /**
-   * Example.
-   *
-   * Daily stand-up meeting at 10:00am each work day. (We work in Honolulu, of course.)
-   * Notify 5 minutes before meeting starts.
-   * Derive the TimePoint at which I should notify on April 19 2006.
-   */
+    * Example.
+    *
+    * Daily stand-up meeting at 10:00am each work day. (We work in Honolulu, of course.)
+    * Notify 5 minutes before meeting starts.
+    * Derive the TimePoint at which I should notify on April 19 2006.
+    */
   @Test
   def testDailyMeetingAlert {
-    val scheduledMeetingTime = TimeOfDay.from(10, 0)
-    val dayOfMeeting = CalendarDate.from(2006, 4, 19)
-    val meetingTimeThisDay = scheduledMeetingTime.on(dayOfMeeting)
+    val scheduledMeetingTime   = TimeOfDay.from(10, 0)
+    val dayOfMeeting           = CalendarDate.from(2006, 4, 19)
+    val meetingTimeThisDay     = scheduledMeetingTime.on(dayOfMeeting)
     val sameMeetingTimeThisDay = dayOfMeeting.atCalendarDateTime(scheduledMeetingTime)
     assertThat(sameMeetingTimeThisDay, is(meetingTimeThisDay))
 

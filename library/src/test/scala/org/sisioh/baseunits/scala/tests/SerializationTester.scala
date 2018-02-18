@@ -23,25 +23,25 @@ import org.junit.Assert._
 import org.apache.commons.io.IOUtils
 
 /**
- * シリアライズのテストを行う、ヘルパークラス。
- */
+  * シリアライズのテストを行う、ヘルパークラス。
+  */
 object SerializationTester {
 
   /**
-   * シリアライズできるかどうか検証する。
-   *
-   * @param serializable シリアライズ対象オブジェクト
-   * @throws AssertionError シリアライズに失敗した場合
-   */
+    * シリアライズできるかどうか検証する。
+    *
+    * @param serializable シリアライズ対象オブジェクト
+    * @throws AssertionError シリアライズに失敗した場合
+    */
   def assertCanBeSerialized(serializable: AnyRef) {
     if (classOf[Serializable].isInstance(serializable) == false) {
       fail("Object doesn't implement java.io.Serializable interface: " + serializable.getClass)
     }
 
-    var out: ObjectOutputStream = null
-    var in: ObjectInputStream = null
+    var out: ObjectOutputStream             = null
+    var in: ObjectInputStream               = null
     val byteArrayOut: ByteArrayOutputStream = new ByteArrayOutputStream
-    var byteArrayIn: ByteArrayInputStream = null
+    var byteArrayIn: ByteArrayInputStream   = null
     try {
       out = new ObjectOutputStream(byteArrayOut)
       out.writeObject(serializable)

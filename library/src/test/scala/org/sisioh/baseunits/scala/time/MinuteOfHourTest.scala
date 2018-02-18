@@ -22,15 +22,15 @@ import org.scalatest.junit.AssertionsForJUnit
 import org.junit.Test
 
 /**
- * `MinuteOfHour`のテストクラス。
- */
+  * `MinuteOfHour`のテストクラス。
+  */
 class MinuteOfHourTest extends AssertionsForJUnit {
 
   /**
-   * [[MinuteOfHour#valueOf(int)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[MinuteOfHour#valueOf(int)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test01_Simple {
     assert(MinuteOfHour(11).value == 11)
@@ -38,10 +38,10 @@ class MinuteOfHourTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[MinuteOfHour#valueOf(int)]]の不正引数テスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[MinuteOfHour#valueOf(int)]]の不正引数テスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test02_IllegalLessThanZero {
     try {
@@ -54,10 +54,10 @@ class MinuteOfHourTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[MinuteOfHour#valueOf(int)]]の不正引数テスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[MinuteOfHour#valueOf(int)]]の不正引数テスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test03_GreaterThan {
     try {
@@ -70,82 +70,82 @@ class MinuteOfHourTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[MinuteOfHour#isAfter(MinuteOfHour)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[MinuteOfHour#isAfter(MinuteOfHour)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test04_LaterAfterEarlier {
-    val later = MinuteOfHour(45)
+    val later   = MinuteOfHour(45)
     val earlier = MinuteOfHour(15)
     assert(later.isAfter(earlier) == true)
   }
 
   /**
-   * [[MinuteOfHour#isAfter(MinuteOfHour)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[MinuteOfHour#isAfter(MinuteOfHour)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test05_EarlierAfterLater {
     val earlier = MinuteOfHour(15)
-    val later = MinuteOfHour(45)
+    val later   = MinuteOfHour(45)
     assert(earlier.isAfter(later) == false)
   }
 
   /**
-   * [[MinuteOfHour#isAfter(MinuteOfHour)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[MinuteOfHour#isAfter(MinuteOfHour)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test06_EqualAfterEqual {
-    val anMinute = MinuteOfHour(45)
+    val anMinute      = MinuteOfHour(45)
     val anotherMinute = MinuteOfHour(45)
     assert(anMinute.isAfter(anotherMinute) == (false))
   }
 
   /**
-   * [[MinuteOfHour#isBefore(MinuteOfHour)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[MinuteOfHour#isBefore(MinuteOfHour)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test07_LaterBeforeEarlier {
-    val later = MinuteOfHour(45)
+    val later   = MinuteOfHour(45)
     val earlier = MinuteOfHour(15)
     assert(later.isBefore(earlier) == (false))
   }
 
   /**
-   * [[MinuteOfHour#isBefore(MinuteOfHour)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[MinuteOfHour#isBefore(MinuteOfHour)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test08_EarlierBeforeLater {
     val earlier = MinuteOfHour(15)
-    val later = MinuteOfHour(45)
+    val later   = MinuteOfHour(45)
     assert(earlier.isBefore(later) == true)
   }
 
   /**
-   * [[MinuteOfHour#isBefore(MinuteOfHour)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[MinuteOfHour#isBefore(MinuteOfHour)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test09_EqualBeforeEqual {
-    val anMinute = MinuteOfHour(15)
+    val anMinute      = MinuteOfHour(15)
     val anotherMinute = MinuteOfHour(15)
     assert(anMinute.isBefore(anotherMinute) == (false))
   }
 
   /**
-   * [[MinuteOfHour#equals(Object)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[MinuteOfHour#equals(Object)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test10_equals {
     val m14 = MinuteOfHour(14)
@@ -159,10 +159,10 @@ class MinuteOfHourTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[MinuteOfHour#toString]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[MinuteOfHour#toString]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test11_toString {
     for (i <- 1 until 10) {

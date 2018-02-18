@@ -22,14 +22,15 @@ import org.scalatest.junit.AssertionsForJUnit
 import org.junit.Test
 
 /**
- * `DayOfMonth`のテストクラス。
- */
+  * `DayOfMonth`のテストクラス。
+  */
 class DayOfMonthTest extends AssertionsForJUnit {
+
   /**
-   * インスタンス生成テスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * インスタンス生成テスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test01_create {
     for (i <- 1 until 31) {
@@ -60,10 +61,10 @@ class DayOfMonthTest extends AssertionsForJUnit {
   }
 
   /**
-   * インスタンス生成テスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * インスタンス生成テスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test02_create2 {
     for (i <- 1 until 31) {
@@ -93,10 +94,10 @@ class DayOfMonthTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[DayOfMonth#isBefore(DayOfMonth)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[DayOfMonth#isBefore(DayOfMonth)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test03_isBefore {
     assert(DayOfMonth(1).isBefore(DayOfMonth(1)) == false)
@@ -117,10 +118,10 @@ class DayOfMonthTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[DayOfMonth#isAfter(DayOfMonth)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[DayOfMonth#isAfter(DayOfMonth)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test04_isAfter {
     assert(DayOfMonth(1).isAfter(DayOfMonth(1)) == false)
@@ -141,10 +142,10 @@ class DayOfMonthTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[DayOfMonth#compareTo(DayOfMonth)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[DayOfMonth#compareTo(DayOfMonth)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test05_compareTo {
     assert(DayOfMonth(10).compareTo(DayOfMonth(10)) == 0)
@@ -156,10 +157,10 @@ class DayOfMonthTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[DayOfMonth#toString]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[DayOfMonth#toString]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test06_toString {
     assert(DayOfMonth(1).toString == ("1"))
@@ -168,10 +169,10 @@ class DayOfMonthTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[DayOfMonth#equals(Object)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[DayOfMonth#equals(Object)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test07_equals {
     val dom1 = DayOfMonth(1)

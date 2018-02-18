@@ -21,25 +21,25 @@ package example.doctorAppointments
 import java.util.TimeZone
 
 import org.junit.Test
-import org.scalatest.{ Assertions, Matchers }
+import org.scalatest.{Assertions, Matchers}
 import org.sisioh.baseunits.scala.intervals.Limit
-import org.sisioh.baseunits.scala.time.{ CalendarDate, Duration, TimeInterval, TimePoint }
+import org.sisioh.baseunits.scala.time.{CalendarDate, Duration, TimeInterval, TimePoint}
 
 class AppointmentCalendarTest extends Assertions with Matchers {
 
   /**
-   * Example.
-   */
+    * Example.
+    */
   @Test
   def testEventsForDate {
     val pt = TimeZone.getTimeZone("America/Los_Angeles").toZoneId
 
-    val jun7at10 = TimePoint.at(2004, 6, 7, 10, 0, 0, 0, pt)
-    val shortTime = TimeInterval.startingFrom(Limit(jun7at10), Duration.hours(3))
+    val jun7at10   = TimePoint.at(2004, 6, 7, 10, 0, 0, 0, pt)
+    val shortTime  = TimeInterval.startingFrom(Limit(jun7at10), Duration.hours(3))
     val shortEvent = Appointment(shortTime)
 
-    val jun9at13 = TimePoint.at(2004, 6, 9, 13, 0, 0, 0, pt)
-    val longTime = TimeInterval.over(Limit(jun7at10), Limit(jun9at13))
+    val jun9at13  = TimePoint.at(2004, 6, 9, 13, 0, 0, 0, pt)
+    val longTime  = TimeInterval.over(Limit(jun7at10), Limit(jun9at13))
     val longEvent = Appointment(longTime)
 
     val cal = new AppointmentCalendar(pt)

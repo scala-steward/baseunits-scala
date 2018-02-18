@@ -22,44 +22,45 @@ import org.scalatest.junit.AssertionsForJUnit
 import org.junit.Test
 
 /**
- * `Proration`のテストクラス。
- */
+  * `Proration`のテストクラス。
+  */
 class ProrationTest extends AssertionsForJUnit {
+
   /**
-   * {@link Proration#proratedOver(Money, long[])}
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * {@link Proration#proratedOver(Money, long[])}
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test01_Allocate1 {
     val proportions = Array(1L, 1L)
-    val result = Proration.proratedOver(Money.dollars(0.01), proportions)
+    val result      = Proration.proratedOver(Money.dollars(0.01), proportions)
     assert(result(0) == Money.dollars(0.01))
     assert(result(1) == Money.dollars(0))
   }
 
   /**
-   * {@link Proration#proratedOver(Money, long[])}
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * {@link Proration#proratedOver(Money, long[])}
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test02_ProrateOver2 {
     val proportions = Array(3, 7)
-    val result = Proration.proratedOver(Money.dollars(0.05), proportions)
+    val result      = Proration.proratedOver(Money.dollars(0.05), proportions)
     assert(result(0) == Money.dollars(0.02))
     assert(result(1) == Money.dollars(0.03))
   }
 
   /**
-   * {@link Proration#proratedOver(Money, long[])}
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * {@link Proration#proratedOver(Money, long[])}
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test03_ProrateOver10 {
     val proportions = Array(17, 2, 1, 35, 35, 10)
-    val result = Proration.proratedOver(Money.dollars(0.10), proportions)
+    val result      = Proration.proratedOver(Money.dollars(0.10), proportions)
     assert(result(0) == Money.dollars(0.02))
     assert(result(1) == Money.dollars(0.01))
     assert(result(2) == Money.dollars(0.00))
@@ -71,26 +72,26 @@ class ProrationTest extends AssertionsForJUnit {
   }
 
   /**
-   * {@link Proration#proratedOver(Money, long[])}
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * {@link Proration#proratedOver(Money, long[])}
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test04_ProrateZeroTotal {
     val proportions = Array(3, 7)
-    val result = Proration.proratedOver(Money.dollars(0), proportions)
+    val result      = Proration.proratedOver(Money.dollars(0), proportions)
     assert(result(0) == Money.dollars(0))
     assert(result(1) == Money.dollars(0))
   }
 
   /**
-   * {@link Proration#dividedEvenlyIntoParts(Money, int)}
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * {@link Proration#dividedEvenlyIntoParts(Money, int)}
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test05_ProrateTotalIndivisibleBy3 {
-    val actual = Proration.dividedEvenlyIntoParts(Money.dollars(100), 3)
+    val actual   = Proration.dividedEvenlyIntoParts(Money.dollars(100), 3)
     val expected = Array(Money.dollars(33.34), Money.dollars(33.33), Money.dollars(33.33))
     for (i <- 0 until expected.length) {
       assert(actual(i) == expected(i))
@@ -98,10 +99,10 @@ class ProrationTest extends AssertionsForJUnit {
   }
 
   /**
-   * {@link Proration#dividedEvenlyIntoParts(Money, int)}
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * {@link Proration#dividedEvenlyIntoParts(Money, int)}
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test06_ProrateOnlyOneShortOfEven {
     val prorated = Proration.dividedEvenlyIntoParts(Money.dollars(1.09), 10)
@@ -112,10 +113,10 @@ class ProrationTest extends AssertionsForJUnit {
   }
 
   /**
-   * {@link Proration#distributeRemainderOver(Money[], Money)}のテスト。（内部API）
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * {@link Proration#distributeRemainderOver(Money[], Money)}のテスト。（内部API）
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test07_DistributeRemainder {
     val startingValues = new Array[Money](4)
@@ -131,10 +132,10 @@ class ProrationTest extends AssertionsForJUnit {
   }
 
   /**
-   * {@link Proration#sum(Money[])}
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * {@link Proration#sum(Money[])}
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test08_SumMoney {
     val startingValues = new Array[Money](4)
@@ -146,15 +147,15 @@ class ProrationTest extends AssertionsForJUnit {
   }
 
   /**
-   * {@link Proration#partOfWhole(Money, long, long)}
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * {@link Proration#partOfWhole(Money, long, long)}
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test09_PartOfWhole {
-    val total = Money.dollars(10.00)
+    val total   = Money.dollars(10.00)
     val portion = 3L;
-    val whole = 9L;
+    val whole   = 9L;
     assert(Proration.partOfWhole(total, portion, whole) == Money.dollars(3.33))
   }
 }

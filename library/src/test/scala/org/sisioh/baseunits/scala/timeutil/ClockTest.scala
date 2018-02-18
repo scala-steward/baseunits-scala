@@ -20,13 +20,13 @@ package org.sisioh.baseunits.scala.timeutil
 
 import org.scalatest.junit.AssertionsForJUnit
 import java.util.TimeZone
-import org.junit.{ Test, After }
-import org.sisioh.baseunits.scala.time.{ CalendarDate, TimeSource, TimePoint }
+import org.junit.{Test, After}
+import org.sisioh.baseunits.scala.time.{CalendarDate, TimeSource, TimePoint}
 
 /**
- * `Clock`のテストクラス。
- * @author j5ik2o
- */
+  * `Clock`のテストクラス。
+  * @author j5ik2o
+  */
 class ClockTest extends AssertionsForJUnit {
 
   val gmt = TimeZone.getTimeZone("Universal").toZoneId
@@ -43,17 +43,16 @@ class ClockTest extends AssertionsForJUnit {
   }
 
   /**
-   * テストの情報を破棄する。
-   * @throws Exception 例外が発生した場合
-   */
+    * テストの情報を破棄する。
+    * @throws Exception 例外が発生した場合
+    */
   @After
-  def tearDown {
-  }
+  def tearDown {}
 
   /**
-   * [[Clock#now()]]のテスト。
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Clock#now()]]のテスト。
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test01_Now {
     val clock = Clock(dummySourceDec1_5h, gmt)
@@ -61,19 +60,19 @@ class ClockTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[Clock#now()]]で例外が発生しないこと。
-   * [ 1466694 ] Clock.now() should use default TimeSource
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Clock#now()]]で例外が発生しないこと。
+    * [ 1466694 ] Clock.now() should use default TimeSource
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test02_NowDoesntBreak {
     Clock.now
   }
 
   /**
-   * [[Clock#setDefaultTimeZone(TimeZone)]]のテスト。
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Clock#setDefaultTimeZone(TimeZone)]]のテスト。
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test03_Today {
     val clock = Clock(dummySourceDec1_5h, gmt)

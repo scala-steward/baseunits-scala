@@ -19,10 +19,10 @@
 package example.insuranceRates
 
 import org.junit.Test
-import org.scalatest.{ Assertions, Matchers }
-import org.sisioh.baseunits.scala.intervals.{ Interval, IntervalMap, Limit, LinearIntervalMap }
-import org.sisioh.baseunits.scala.money.{ Money, Proration }
-import org.sisioh.baseunits.scala.time.{ CalendarDate, Duration }
+import org.scalatest.{Assertions, Matchers}
+import org.sisioh.baseunits.scala.intervals.{Interval, IntervalMap, Limit, LinearIntervalMap}
+import org.sisioh.baseunits.scala.money.{Money, Proration}
+import org.sisioh.baseunits.scala.time.{CalendarDate, Duration}
 import org.sisioh.baseunits.scala.util.Ratio
 
 class CalculateRate extends Assertions with Matchers {
@@ -31,8 +31,8 @@ class CalculateRate extends Assertions with Matchers {
   val policyEffectiveDate = CalendarDate.from(2004, 11, 7)
 
   /**
-   * Example.
-   */
+    * Example.
+    */
   @Test //@Ignore
   def testLookUpMoreComplicated {
     //		BusinessCalendar paymentCalendar = new BusinessCalendar()
@@ -49,27 +49,27 @@ class CalculateRate extends Assertions with Matchers {
   }
 
   /**
-   *  Example.
-   */
+    *  Example.
+    */
 
   @Test
   def testLookUpRate {
-    val birthdate = CalendarDate.from(1963, 4, 6)
+    val birthdate          = CalendarDate.from(1963, 4, 6)
     val ageOnEffectiveDate = birthdate.through(policyEffectiveDate).lengthInMonths
-    val monthlyPremium = insuranceSchedule.get(Limit(ageOnEffectiveDate)).get
+    val monthlyPremium     = insuranceSchedule.get(Limit(ageOnEffectiveDate)).get
     monthlyPremium shouldEqual Money.dollars(150.00)
   }
 
   /**
-   * 初月の日割り計算の例。
-   */
+    * 初月の日割り計算の例。
+    */
   @Test
   def testProrateFirstMonth {
     // 月額 150.00 USD
     val monthlyPremium = Money.dollars(150.00)
 
     // 契約月の残り期間
-    val entireMonth = policyEffectiveDate.asMonthInterval
+    val entireMonth      = policyEffectiveDate.asMonthInterval
     val remainderOfMonth = policyEffectiveDate.through(entireMonth.end)
 
     // 契約月の残り日数 ÷ 契約月の全日数
@@ -86,11 +86,11 @@ class CalculateRate extends Assertions with Matchers {
   }
 
   /**
-   * Example.
-   */
+    * Example.
+    */
   @Test
   def testQuarterlyPremiumPayment() {
-    val premium = Money.dollars(150.00).per(Duration.months(1))
+    val premium          = Money.dollars(150.00).per(Duration.months(1))
     val quarterlyPayment = premium.over(Duration.quarters(1))
     quarterlyPayment shouldEqual Money.dollars(450.00)
   }

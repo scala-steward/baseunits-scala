@@ -25,8 +25,8 @@ import scala.collection.mutable.ArrayBuffer
 import scala.util.Random
 
 /**
- * `Inteval`のテストクラス。
- */
+  * `Inteval`のテストクラス。
+  */
 class IntevalTest extends AssertionsForJUnit {
 
   val c5_10c = Interval.closed(Limit(BigDecimal(5)), Limit(BigDecimal(10)))
@@ -266,20 +266,20 @@ class IntevalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[Interval]]のインスタンスがシリアライズできるかどうか検証する。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval]]のインスタンスがシリアライズできるかどうか検証する。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   //	@Test
   //	def test01_Serialization {
   //		SerializationTester.assertCanBeSerialized(c5_10c);
   //	}
 
   /**
-   * [[Interval]]のインスタンス生成テスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval]]のインスタンス生成テスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test03_Assertions {
     // Redundant, maybe, but with all the compiler default
@@ -294,10 +294,10 @@ class IntevalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[Interval# u p T o ( C o m p a r a b l e )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# u p T o ( C o m p a r a b l e )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test04_UpTo {
     val range = Interval.upTo(Limit(5.5D))
@@ -308,10 +308,10 @@ class IntevalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[Interval# a n d M o r e ( C o m p a r a b l e )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# a n d M o r e ( C o m p a r a b l e )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test05_AndMore {
     val range = Interval.andMore(Limit(5.5D))
@@ -323,23 +323,23 @@ class IntevalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[Interval# n e w O f S a m e T y p e ( C o m p a r a b l e, b o o l e a n, C o m p a r a b l e, b o o l e a n )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# n e w O f S a m e T y p e ( C o m p a r a b l e, b o o l e a n, C o m p a r a b l e, b o o l e a n )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test06_AbstractCreation {
-    val concrete = new Interval(Limit(1), true, Limit(3), true)
+    val concrete    = new Interval(Limit(1), true, Limit(3), true)
     val newInterval = concrete.newOfSameType(Limit(1), false, Limit(4), false)
-    val expected = new Interval(Limit(1), false, Limit(4), false)
+    val expected    = new Interval(Limit(1), false, Limit(4), false)
     assert(newInterval == expected)
   }
 
   /**
-   * [[Interval# i s B e l o w ( C o m p a r a b l e )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# i s B e l o w ( C o m p a r a b l e )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test07_Below {
     val range = Interval.closed(Limit(BigDecimal(-5.5)), Limit(BigDecimal(6.6)))
@@ -352,10 +352,10 @@ class IntevalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[Interval# i n c l u d e s ( C o m p a r a b l e )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# i n c l u d e s ( C o m p a r a b l e )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test08_Includes {
     val range = Interval.closed(Limit(BigDecimal(-5.5)), Limit(BigDecimal(6.6)))
@@ -368,10 +368,10 @@ class IntevalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[Interval]]の開閉の境界挙動テスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval]]の開閉の境界挙動テスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test09_OpenInterval {
     val exRange = Interval.over(Limit(BigDecimal(-5.5)), false, Limit(BigDecimal(6.6)), true)
@@ -384,10 +384,10 @@ class IntevalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[Interval# i s E m p t y ( )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# i s E m p t y ( )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test10_IsEmpty {
     assert(Interval.closed(Limit(5), Limit(6)).isEmpty == false)
@@ -397,10 +397,10 @@ class IntevalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[Interval# i n t e r s e c t s ( I n t e r v a l )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# i n t e r s e c t s ( I n t e r v a l )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test11_Intersects {
     assert(c5_10c.intersects(c1_10c) == true)
@@ -491,10 +491,10 @@ class IntevalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[Interval# i n t e r s e c t ( I n t e r v a l )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# i n t e r s e c t ( I n t e r v a l )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test12_Intersection {
     assert(c5_10c.intersect(c1_10c) == c5_10c)
@@ -513,10 +513,10 @@ class IntevalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[Interval# g r e a t e r O f L o w e r L i m i t s ( I n t e r v a l )]]のテスト。（内部API）
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# g r e a t e r O f L o w e r L i m i t s ( I n t e r v a l )]]のテスト。（内部API）
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test13_GreaterOfLowerLimits {
     assert(c5_10c.greaterOfLowerLimits(c1_10c) == Limit(BigDecimal(5)))
@@ -526,10 +526,10 @@ class IntevalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[Interval# l e s s e r O f U p p e r L i m i t s ( I n t e r v a l )]]のテスト。（内部API）
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# l e s s e r O f U p p e r L i m i t s ( I n t e r v a l )]]のテスト。（内部API）
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test14_LesserOfUpperLimits {
     assert(c5_10c.lesserOfUpperLimits(c1_10c) == Limit(BigDecimal(10)))
@@ -539,10 +539,10 @@ class IntevalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[Interval# c o v e r s ( I n t e r v a l )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# c o v e r s ( I n t e r v a l )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test15_CoversInterval {
     assert(c5_10c.covers(c1_10c) == false)
@@ -563,10 +563,10 @@ class IntevalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[Interval# g a p ( I n t e r v a l )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# g a p ( I n t e r v a l )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test16_Gap {
     val c1_3c = Interval.closed(Limit(1), Limit(3))
@@ -581,113 +581,113 @@ class IntevalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test17_RelativeComplementDisjoint {
-    val c1_3c = Interval.closed(Limit(1), Limit(3))
-    val c5_7c = Interval.closed(Limit(5), Limit(7))
+    val c1_3c      = Interval.closed(Limit(1), Limit(3))
+    val c5_7c      = Interval.closed(Limit(5), Limit(7))
     val complement = c1_3c.complementRelativeTo(c5_7c)
     assert(complement.size == 1)
     assert(complement(0) == c5_7c)
   }
 
   /**
-   * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test18_RelativeComplementDisjointAdjacentOpen {
-    val c1_3o = Interval.over(Limit(1), true, Limit(3), false)
-    val c3_7c = Interval.closed(Limit(3), Limit(7))
+    val c1_3o      = Interval.over(Limit(1), true, Limit(3), false)
+    val c3_7c      = Interval.closed(Limit(3), Limit(7))
     val complement = c1_3o.complementRelativeTo(c3_7c)
     assert(complement.size == 1)
     assert(complement(0) == c3_7c)
   }
 
   /**
-   * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test19_RelativeComplementOverlapLeft {
-    val c1_5c = Interval.closed(Limit(1), Limit(5))
-    val c3_7c = Interval.closed(Limit(3), Limit(7))
+    val c1_5c      = Interval.closed(Limit(1), Limit(5))
+    val c3_7c      = Interval.closed(Limit(3), Limit(7))
     val complement = c3_7c.complementRelativeTo(c1_5c)
-    val c1_3o = Interval.over(Limit(1), true, Limit(3), false)
+    val c1_3o      = Interval.over(Limit(1), true, Limit(3), false)
     assert(complement.size == 1)
     assert(complement(0) == c1_3o)
   }
 
   /**
-   * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test20_RelativeComplementOverlapRight {
-    val c1_5c = Interval.closed(Limit(1), Limit(5))
-    val c3_7c = Interval.closed(Limit(3), Limit(7))
+    val c1_5c      = Interval.closed(Limit(1), Limit(5))
+    val c3_7c      = Interval.closed(Limit(3), Limit(7))
     val complement = c1_5c.complementRelativeTo(c3_7c)
-    val o5_7c = Interval.over(Limit(5), false, Limit(7), true)
+    val o5_7c      = Interval.over(Limit(5), false, Limit(7), true)
     assert(complement.size == 1)
     assert(complement(0) == o5_7c)
   }
 
   /**
-   * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test21_RelativeComplementAdjacentClosed {
-    val c1_3c = Interval.closed(Limit(1), Limit(3))
-    val c5_7c = Interval.closed(Limit(5), Limit(7))
+    val c1_3c      = Interval.closed(Limit(1), Limit(3))
+    val c5_7c      = Interval.closed(Limit(5), Limit(7))
     val complement = c1_3c.complementRelativeTo(c5_7c)
     assert(complement.size == 1)
     assert(complement(0) == c5_7c)
   }
 
   /**
-   * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test22_RelativeComplementEnclosing {
-    val c3_5c = Interval.closed(Limit(3), Limit(5))
-    val c1_7c = Interval.closed(Limit(1), Limit(7))
+    val c3_5c      = Interval.closed(Limit(3), Limit(5))
+    val c1_7c      = Interval.closed(Limit(1), Limit(7))
     val complement = c1_7c.complementRelativeTo(c3_5c)
     assert(complement.size == 0)
   }
 
   /**
-   * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test23_RelativeComplementEqual {
-    val c1_7c = Interval.closed(Limit(1), Limit(7))
+    val c1_7c      = Interval.closed(Limit(1), Limit(7))
     val complement = c1_7c.complementRelativeTo(c1_7c)
     assert(complement.size == 0)
   }
 
   /**
-   * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test24_RelativeComplementEnclosed {
-    val c3_5c = Interval.closed(Limit(3), Limit(5))
-    val c1_7c = Interval.closed(Limit(1), Limit(7))
-    val c1_3o = Interval.over(Limit(1), true, Limit(3), false)
-    val o5_7c = Interval.over(Limit(5), false, Limit(7), true)
+    val c3_5c      = Interval.closed(Limit(3), Limit(5))
+    val c1_7c      = Interval.closed(Limit(1), Limit(7))
+    val c1_3o      = Interval.over(Limit(1), true, Limit(3), false)
+    val o5_7c      = Interval.over(Limit(5), false, Limit(7), true)
     val complement = c3_5c.complementRelativeTo(c1_7c)
     assert(complement.size == 2)
     assert(complement(0) == c1_3o)
@@ -695,24 +695,24 @@ class IntevalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test25_RelativeComplementEnclosedEndPoint {
-    val o3_5o = Interval.open(Limit(3), Limit(5))
-    val c3_5c = Interval.closed(Limit(3), Limit(5))
+    val o3_5o      = Interval.open(Limit(3), Limit(5))
+    val c3_5c      = Interval.closed(Limit(3), Limit(5))
     val complement = o3_5o.complementRelativeTo(c3_5c)
     assert(complement.size == 2)
     assert(complement(0).includes(Limit(3)) == true)
   }
 
   /**
-   * [[Interval# i s S i n g l e E l e m e n t ( )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# i s S i n g l e E l e m e n t ( )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test26_IsSingleElement {
     assert(o1_1c.isSingleElement == true)
@@ -723,10 +723,10 @@ class IntevalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[Interval# e q u a l s ( I n t e r v a l )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# e q u a l s ( I n t e r v a l )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test27_EqualsForOnePointIntervals {
     assert(c1_1o == o1_1c)
@@ -736,26 +736,26 @@ class IntevalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[Interval# e m p t y O f S a m e T y p e ( )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# e m p t y O f S a m e T y p e ( )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test28_EqualsForEmptyIntervals {
     assert(c4_6c.emptyOfSameType == c1_10c.emptyOfSameType)
   }
 
   /**
-   * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test29_RelativeComplementEnclosedOpen {
-    val o3_5o = Interval.open(Limit(3), Limit(5))
-    val c1_7c = Interval.closed(Limit(1), Limit(7))
-    val c1_3c = Interval.closed(Limit(1), Limit(3))
-    val c5_7c = Interval.closed(Limit(5), Limit(7))
+    val o3_5o      = Interval.open(Limit(3), Limit(5))
+    val c1_7c      = Interval.closed(Limit(1), Limit(7))
+    val c1_3c      = Interval.closed(Limit(1), Limit(3))
+    val c5_7c      = Interval.closed(Limit(5), Limit(7))
     val complement = o3_5o.complementRelativeTo(c1_7c)
     assert(complement.size == 2)
     assert(complement(0) == c1_3c)
@@ -763,10 +763,10 @@ class IntevalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[Interval# t o S t r i n g ( )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# t o S t r i n g ( )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test30_ToString {
     assert(c1_10c.toString == "[Limit(1), Limit(10)]")
@@ -776,31 +776,31 @@ class IntevalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test31_RelativeComplementOverlapRightOpen {
-    val c3_7o = Interval.over(Limit(3), true, Limit(6), false)
-    val c1_5o = Interval.over(Limit(1), true, Limit(5), false)
+    val c3_7o      = Interval.over(Limit(3), true, Limit(6), false)
+    val c1_5o      = Interval.over(Limit(1), true, Limit(5), false)
     val complement = c3_7o.complementRelativeTo(c1_5o)
-    val c1_3o = Interval.over(Limit(1), true, Limit(3), false)
+    val c1_3o      = Interval.over(Limit(1), true, Limit(3), false)
     assert(complement.size == 1)
     assert(complement(0) == c1_3o)
   }
 
   /**
-   * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[Interval# c o m p l e m e n t R e l a t i v e T o ( I n t e r v a l )]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test32_RelativeComplementOverlapLeftOpen {
-    val o1_5c = Interval.over(Limit(1), false, Limit(5), true)
-    val o3_7c = Interval.over(Limit(2), false, Limit(7), true)
+    val o1_5c      = Interval.over(Limit(1), false, Limit(5), true)
+    val o3_7c      = Interval.over(Limit(2), false, Limit(7), true)
     val complement = o1_5c.complementRelativeTo(o3_7c)
-    val o5_7c = Interval.over(Limit(5), false, Limit(7), true)
+    val o5_7c      = Interval.over(Limit(5), false, Limit(7), true)
     assert(complement.size == 1)
     assert(complement(0) == o5_7c)
   }

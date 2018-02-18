@@ -24,8 +24,8 @@ import org.sisioh.baseunits.scala.intervals.Limit
 import org.sisioh.baseunits.scala.tests.SerializationTester
 
 /**
- * `TimeInterval`のテストクラス。
- */
+  * `TimeInterval`のテストクラス。
+  */
 class TimeIntervalTest extends AssertionsForJUnit {
 
   val dec19_2003 = TimePoint.atMidnight(2003, 12, 19)
@@ -39,10 +39,10 @@ class TimeIntervalTest extends AssertionsForJUnit {
   val dec23_2003 = TimePoint.atMidnight(2003, 12, 23)
 
   /**
-   * [[TimeInterval]]のインスタンスがシリアライズできるかどうか検証する。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeInterval]]のインスタンスがシリアライズできるかどうか検証する。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test01_Serialization {
     val interval = TimeInterval.closed(Limit(dec20_2003), Limit(dec22_2003))
@@ -50,10 +50,10 @@ class TimeIntervalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeInterval#isBefore(TimePoint)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeInterval#isBefore(TimePoint)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test02_BeforeClosed {
     val interval = TimeInterval.closed(Limit(dec20_2003), Limit(dec22_2003))
@@ -64,10 +64,10 @@ class TimeIntervalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeInterval#isAfter(TimePoint)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeInterval#isAfter(TimePoint)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test03_AfterClosed {
     val interval = TimeInterval.closed(Limit(dec20_2003), Limit(dec22_2003))
@@ -78,10 +78,10 @@ class TimeIntervalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeInterval#includes(TimePoint)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeInterval#includes(TimePoint)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test04_IncludesClosed {
     val interval = TimeInterval.closed(Limit(dec20_2003), Limit(dec22_2003))
@@ -93,10 +93,10 @@ class TimeIntervalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeInterval#isBefore(TimePoint)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeInterval#isBefore(TimePoint)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test05_BeforeOpen {
     val interval = TimeInterval.open(Limit(dec20_2003), Limit(dec22_2003))
@@ -107,10 +107,10 @@ class TimeIntervalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeInterval#isAfter(TimePoint)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeInterval#isAfter(TimePoint)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test06_AfterOpen {
     val interval = TimeInterval.open(Limit(dec20_2003), Limit(dec22_2003))
@@ -121,10 +121,10 @@ class TimeIntervalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeInterval#includes(TimePoint)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeInterval#includes(TimePoint)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test07_IncludesOpen {
     val interval = TimeInterval.open(Limit(dec20_2003), Limit(dec22_2003))
@@ -136,10 +136,10 @@ class TimeIntervalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeInterval#includes(TimePoint)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeInterval#includes(TimePoint)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test08_IncludesHalfOpen {
     val interval = TimeInterval.over(Limit(dec20_2003), true, Limit(dec22_2003), false)
@@ -151,13 +151,13 @@ class TimeIntervalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeInterval#startingFrom(TimePoint, Duration)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeInterval#startingFrom(TimePoint, Duration)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test09_CreateWithDurationFrom {
-    val twoDays = Duration.days(2)
+    val twoDays   = Duration.days(2)
     val following = TimeInterval.startingFrom(Limit(dec20_2003), true, twoDays, true)
     assert(following.start == Limit(dec20_2003), "[ dec20")
     assert(following.end == Limit(dec22_2003), "dec 22]")
@@ -165,23 +165,23 @@ class TimeIntervalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeInterval#preceding(TimePoint, Duration)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeInterval#preceding(TimePoint, Duration)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test10_CreateWithDurationUntil {
-    val twoDays = Duration.days(2)
+    val twoDays   = Duration.days(2)
     val preceding = TimeInterval.preceding(Limit(dec21_2003), true, twoDays, true)
     assert(preceding.start == Limit(dec19_2003), "[ dec19")
     assert(preceding.end == Limit(dec21_2003), "dec21 )")
   }
 
   /**
-   * [[TimeInterval#over(TimePoint, TimePoint)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeInterval#over(TimePoint, TimePoint)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test11_DefaultFromPoints {
     /*       Default is closed start, open end [start, end)
@@ -198,10 +198,10 @@ class TimeIntervalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeInterval#startingFrom(TimePoint, Duration)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeInterval#startingFrom(TimePoint, Duration)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test12_DefaultFromDuration {
     /*       Default is closed start, open end [start, end)
@@ -218,10 +218,10 @@ class TimeIntervalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeInterval#everFrom(TimePoint)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeInterval#everFrom(TimePoint)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test13_EverFrom {
     val afterDec20 = TimeInterval.everFrom(Limit(dec20_2003))
@@ -231,10 +231,10 @@ class TimeIntervalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeInterval#everPreceding(TimePoint)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeInterval#everPreceding(TimePoint)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test14_EverUntil {
     val afterDec20 = TimeInterval.everPreceding(Limit(dec20_2003))
@@ -244,16 +244,16 @@ class TimeIntervalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeInterval#open(TimePoint, TimePoint)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeInterval#open(TimePoint, TimePoint)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test15_Length {
     var interval = TimeInterval.open(Limit(dec20_2003), Limit(dec22_2003))
     assert(interval.length == Duration.days(2))
 
-    val first = TimePoint.at(2004, 1, 1, 1, 1, 1, 1)
+    val first  = TimePoint.at(2004, 1, 1, 1, 1, 1, 1)
     val second = TimePoint.at(2004, 1, 6, 5, 4, 3, 2)
     interval = TimeInterval.closed(Limit(first), Limit(second))
     val expectedLength = Duration.daysHoursMinutesSecondsMilliseconds(5, 4, 3, 2, 1)
@@ -261,16 +261,16 @@ class TimeIntervalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeInterval#daysIterator]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeInterval#daysIterator]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test16_DaysIterator {
-    val start = TimePoint.at(2004, 2, 5, 10, 0)
-    val end = TimePoint.at(2004, 2, 8, 2, 0)
+    val start    = TimePoint.at(2004, 2, 5, 10, 0)
+    val end      = TimePoint.at(2004, 2, 8, 2, 0)
     val interval = TimeInterval.over(Limit(start), Limit(end))
-    val it = interval.daysIterator
+    val it       = interval.daysIterator
     assert(it.hasNext)
     assert(it.next == start)
     assert(it.hasNext)
@@ -296,23 +296,23 @@ class TimeIntervalTest extends AssertionsForJUnit {
     }
 
     val interval3 = TimeInterval.everFrom(Limit(start))
-    val it3 = interval3.daysIterator
+    val it3       = interval3.daysIterator
     for (i <- 0 until 100) {
       assert(it3.hasNext)
     }
   }
 
   /**
-   * [[TimeInterval#subintervalIterator(Duration)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeInterval#subintervalIterator(Duration)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test17_SubintervalIterator {
     val d4_h10 = TimePoint.at(2004, 2, 4, 10, 0)
     val d6_h10 = TimePoint.at(2004, 2, 6, 10, 0)
     val d8_h10 = TimePoint.at(2004, 2, 8, 10, 0)
-    val d9_h2 = TimePoint.at(2004, 2, 9, 2, 0)
+    val d9_h2  = TimePoint.at(2004, 2, 9, 2, 0)
 
     val interval = TimeInterval.over(Limit(d4_h10), Limit(d9_h2))
     var iterator = interval.subintervalIterator(Duration.days(2))
@@ -332,11 +332,11 @@ class TimeIntervalTest extends AssertionsForJUnit {
     iterator = interval.subintervalIterator(Duration.weeks(1))
     assert(!iterator.hasNext)
 
-    val h2 = d9_h2;
+    val h2     = d9_h2;
     val h3_m30 = TimePoint.at(2004, 2, 9, 3, 30)
-    val h5 = TimePoint.at(2004, 2, 9, 5, 0)
+    val h5     = TimePoint.at(2004, 2, 9, 5, 0)
     val h6_m30 = TimePoint.at(2004, 2, 9, 6, 30)
-    val h8 = TimePoint.at(2004, 2, 9, 8, 0)
+    val h8     = TimePoint.at(2004, 2, 9, 8, 0)
 
     val interval2 = TimeInterval.over(Limit(h2), Limit(h8))
     iterator = interval2.subintervalIterator(Duration.minutes(90))
@@ -360,14 +360,14 @@ class TimeIntervalTest extends AssertionsForJUnit {
   }
 
   /**
-   * [[TimeInterval#intersects(Interval)]]のテスト。
-   *
-   * @throws Exception 例外が発生した場合
-   */
+    * [[TimeInterval#intersects(Interval)]]のテスト。
+    *
+    * @throws Exception 例外が発生した場合
+    */
   @Test
   def test18_Intersection {
-    val i19_22 = TimeInterval.over(Limit(dec19_2003), Limit(dec22_2003))
-    val i20_23 = TimeInterval.over(Limit(dec20_2003), Limit(dec23_2003))
+    val i19_22       = TimeInterval.over(Limit(dec19_2003), Limit(dec22_2003))
+    val i20_23       = TimeInterval.over(Limit(dec20_2003), Limit(dec23_2003))
     val intersection = i19_22.intersect(i20_23)
     assert(intersection.start == Limit(dec20_2003))
     assert(intersection.end == Limit(dec22_2003))
