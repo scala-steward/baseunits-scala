@@ -33,10 +33,9 @@ import org.sisioh.baseunits.scala.intervals.{Interval, Limit, LimitValue, Limitl
   * @param startValue 開始日
   * @param endValue   終了日
   */
-class CalendarInterval protected (
-    startValue: LimitValue[CalendarDate],
-    endValue: LimitValue[CalendarDate]
-) extends Interval[CalendarDate](startValue, true, endValue, true)
+class CalendarInterval protected (startValue: LimitValue[CalendarDate],
+                                  endValue: LimitValue[CalendarDate])
+    extends Interval[CalendarDate](startValue, true, endValue, true)
     with Serializable {
 
   /**
@@ -158,7 +157,7 @@ class CalendarInterval protected (
     *
     * @return 終了日. 開始日がない場合は`Limitless[CalendarDate]`
     */
-  val end = upperLimit
+  lazy val end: LimitValue[CalendarDate] = upperLimit
 
   /**
     * この期間の日数としての長さを取得する。
@@ -255,7 +254,9 @@ class CalendarInterval protected (
     * @throws IllegalStateException    この期間が開始日（下側限界）を持たない場合
     * @throws IllegalArgumentException 引数subintervalLengthの長さ単位が「日」未満の場合
     */
-  def subintervalIterator(subintervalLength: Duration): Iterator[CalendarInterval] = {
+  def subintervalIterator(
+      subintervalLength: Duration
+  ): Iterator[CalendarInterval] = {
     if (!hasLowerLimit) {
       throw new IllegalStateException
     }
@@ -278,7 +279,9 @@ class CalendarInterval protected (
           throw new NoSuchElementException
         }
         val current = _next
-        _next = segmentLength.startingFromCalendarDate(Limit(_next.end.toValue.plusDays(1)))
+        _next = segmentLength.startingFromCalendarDate(
+          Limit(_next.end.toValue.plusDays(1))
+        )
         current
       }
     }
@@ -310,8 +313,9 @@ object CalendarInterval {
     * @param calendarInterval [[CalendarInterval]]
     * @return `Option[(CalendarInterval)]`
     */
-  def unapply(calendarInterval: CalendarInterval)
-    : Option[(LimitValue[CalendarDate], LimitValue[CalendarDate])] =
+  def unapply(
+      calendarInterval: CalendarInterval
+  ): Option[(LimitValue[CalendarDate], LimitValue[CalendarDate])] =
     Some(calendarInterval.start, calendarInterval.end)
 
   /**
@@ -365,7 +369,8 @@ object CalendarInterval {
     */
   @deprecated(
     "Use inclusive(startYear: Int, startMonth: Int, startDay: Int, endYear: Int, endMonth: Int, endDay: Int, zoneId: ZoneId) method instead",
-    "0.1.18")
+    "0.1.18"
+  )
   def inclusive(startYear: Int,
                 startMonth: Int,
                 startDay: Int,
@@ -397,7 +402,15 @@ object CalendarInterval {
                 endYear: Int,
                 endMonth: Int,
                 endDay: Int): CalendarInterval =
-    inclusive(startYear, startMonth, startDay, endYear, endMonth, endDay, ZoneIds.Default)
+    inclusive(
+      startYear,
+      startMonth,
+      startDay,
+      endYear,
+      endMonth,
+      endDay,
+      ZoneIds.Default
+    )
 
   /**
     * 指定した年月の1日からその月末までの、期間を生成する。
@@ -408,9 +421,10 @@ object CalendarInterval {
     * @return 期間
     */
   def month(month: CalendarYearMonth): CalendarInterval = {
-    val startDate = CalendarDate.from(month, DayOfMonth(1), month.zoneId)
-    val endMonth  = startDate.plusMonths(1)
-    val endDate   = endMonth.plusDays(-1)
+    val startDate =
+      CalendarDate.from(month, DayOfMonth(1), month.breachEncapsulationOfZoneId)
+    val endMonth = startDate.plusMonths(1)
+    val endDate  = endMonth.plusDays(-1)
     CalendarInterval.inclusive(Limit(startDate), Limit(endDate))
   }
 
@@ -423,7 +437,10 @@ object CalendarInterval {
     * @param month 開始日の月（1〜12）
     * @return 期間
     */
-  @deprecated("Use month(year: Int, _month: Int, zoneId: ZoneId) method instead", "0.1.18")
+  @deprecated(
+    "Use month(year: Int, _month: Int, zoneId: ZoneId) method instead",
+    "0.1.18"
+  )
   def month(year: Int, month: Int, timeZone: TimeZone): CalendarInterval =
     CalendarInterval.month(year, MonthOfYear(month), timeZone.toZoneId)
 
@@ -442,7 +459,10 @@ object CalendarInterval {
     * @param month 開始日の月
     * @return 期間
     */
-  @deprecated("Use month(year: Int, month: MonthOfYear, zoneId: ZoneId) method instead", "0.1.18")
+  @deprecated(
+    "Use month(year: Int, month: MonthOfYear, zoneId: ZoneId) method instead",
+    "0.1.18"
+  )
   def month(year: Int, month: MonthOfYear, timeZone: TimeZone): CalendarInterval =
     CalendarInterval.month(year, month, timeZone.toZoneId)
 
@@ -468,10 +488,13 @@ object CalendarInterval {
     */
   def startingFrom(start: LimitValue[CalendarDate], length: Duration): CalendarInterval = {
     // Uses the common default for calendar intervals, [start, end].
-    if (length.unit.compareTo(TimeUnit.Day) < 0) {
+    if (length.breachEncapsulationOfUnit.compareTo(TimeUnit.Day) < 0) {
       CalendarInterval.inclusive(start, start)
     } else {
-      CalendarInterval.inclusive(start, Limit(start.toValue.plus(length).plusDays(-1)))
+      CalendarInterval.inclusive(
+        start,
+        Limit(start.toValue.plus(length).plusDays(-1))
+      )
     }
   }
 

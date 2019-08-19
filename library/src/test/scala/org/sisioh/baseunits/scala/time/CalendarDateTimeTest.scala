@@ -112,11 +112,17 @@ class CalendarDateTimeTest extends AssertionsForJUnit {
   @Test
   def test06_FromFormattedString {
     assert(
-      CalendarDateTime.parse("2/17/2003 01:23", "M/d/yyyy HH:mm", ZoneIds.Default) == feb17_1_23)
+      CalendarDateTime.parse(
+        "2/17/2003 01:23",
+        "M/d/yyyy HH:mm",
+        ZoneIds.Default
+      ) == feb17_1_23
+    )
     //Now a nonsense pattern, to make sure it isn't succeeding by accident.
     assert(
       CalendarDateTime
-        .parse("#17-03/02 2003, 01:23", "#d-yy/MM yyyy, HH:mm", ZoneIds.Default) == feb17_1_23)
+        .parse("#17-03/02 2003, 01:23", "#d-yy/MM yyyy, HH:mm", ZoneIds.Default) == feb17_1_23
+    )
   }
 
   /**
@@ -130,8 +136,11 @@ class CalendarDateTimeTest extends AssertionsForJUnit {
     assert(!feb17_1_23.equals(feb17_3_45))
     assert(!feb17_1_23.equals(mar13_3_45))
     assert(
-      new CalendarDateTime(CalendarDate.from(2003, 2, 17, ZoneIds.Default), TimeOfDay.from(1, 23))
-        .equals(feb17_1_23))
+      new CalendarDateTime(
+        CalendarDate.from(2003, 2, 17, ZoneIds.Default),
+        TimeOfDay.from(1, 23)
+      ).equals(feb17_1_23)
+    )
     //    assert(new CalendarMinute(CalendarDate.from(2003, 2, 17),
     //      TimeOfDay.from(1, 23)) {
     //
@@ -152,8 +161,10 @@ class CalendarDateTimeTest extends AssertionsForJUnit {
     */
   @Test
   def test09_breachEncapsulationOf {
-    assert(feb17_1_23.date == CalendarDate.from(2003, 2, 17))
-    assert(feb17_1_23.time == TimeOfDay.from(1, 23))
+    assert(
+      feb17_1_23.breachEncapsulationOfDate == CalendarDate.from(2003, 2, 17)
+    )
+    assert(feb17_1_23.breachEncapsulationOfTime == TimeOfDay.from(1, 23))
   }
 
   /**

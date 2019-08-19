@@ -23,4 +23,4 @@ package org.sisioh.baseunits.scala.time
   *
   * @author j5ik2o
   */
-case class TimeSourceException(message: String) extends Exception(message)
+class TimeSourceException(message: String) extends Exception(message)

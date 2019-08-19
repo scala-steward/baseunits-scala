@@ -115,12 +115,13 @@ class MoneyTest extends AssertionsForJUnit {
   @Test
   def test04_Constructor {
     val d69_99 = new Money(BigDecimal("69.99"), USD)
-    assert(d69_99.amount == BigDecimal("69.99"))
-    assert(d69_99.currency == USD)
+    assert(d69_99.breachEncapsulationOfAmount == BigDecimal("69.99"))
+    assert(d69_99.breachEncapsulationOfCurrency == USD)
     try {
       new Money(BigDecimal("69.999"), USD)
       fail(
-        "Money constructor shall never round, and shall not accept a value whose scale doesn't fit the Currency.")
+        "Money constructor shall never round, and shall not accept a value whose scale doesn't fit the Currency."
+      )
     } catch {
       case _: IllegalArgumentException =>
     }
@@ -159,7 +160,10 @@ class MoneyTest extends AssertionsForJUnit {
   @Test
   def test07_MultiplyRounding() {
     assert(d100.times(0.66666667) == Money.dollars(66.67))
-    assert(d100.times(0.66666667, BigDecimal.RoundingMode.DOWN) == Money.dollars(66.66))
+    assert(
+      d100.times(0.66666667, BigDecimal.RoundingMode.DOWN) == Money
+        .dollars(66.66)
+    )
   }
 
   /**
@@ -170,11 +174,18 @@ class MoneyTest extends AssertionsForJUnit {
   @Test
   def test08_MultiplicationWithExplicitRounding {
     assert(
-      d100.times(BigDecimal("0.666666"), BigDecimal.RoundingMode.HALF_EVEN) == Money.dollars(66.67))
-    assert(d100.times(BigDecimal("0.666666"), BigDecimal.RoundingMode.DOWN) == Money.dollars(66.66))
+      d100.times(BigDecimal("0.666666"), BigDecimal.RoundingMode.HALF_EVEN) == Money
+        .dollars(66.67)
+    )
     assert(
-      d100.negated.times(BigDecimal("0.666666"), BigDecimal.RoundingMode.DOWN) == Money.dollars(
-        -66.66))
+      d100.times(BigDecimal("0.666666"), BigDecimal.RoundingMode.DOWN) == Money
+        .dollars(66.66)
+    )
+    assert(
+      d100.negated
+        .times(BigDecimal("0.666666"), BigDecimal.RoundingMode.DOWN) == Money
+        .dollars(-66.66)
+    )
   }
 
   /**
@@ -215,19 +226,22 @@ class MoneyTest extends AssertionsForJUnit {
         .dollars(5.00)
         .dividedBy(Money.dollars(2.00))
         .decimalValue(1, BigDecimal.RoundingMode.UNNECESSARY) ==
-        BigDecimal(2.50))
+        BigDecimal(2.50)
+    )
     assert(
       Money
         .dollars(5.00)
         .dividedBy(Money.dollars(4.00))
         .decimalValue(2, BigDecimal.RoundingMode.UNNECESSARY) ==
-        BigDecimal(1.25))
+        BigDecimal(1.25)
+    )
     assert(
       Money
         .dollars(5.00)
         .dividedBy(Money.dollars(1.00))
         .decimalValue(0, BigDecimal.RoundingMode.UNNECESSARY) ==
-        BigDecimal(5))
+        BigDecimal(5)
+    )
     try {
       Money
         .dollars(5.00)
@@ -448,7 +462,11 @@ class MoneyTest extends AssertionsForJUnit {
   def test24_ApplyRatio {
     val oneThird = Ratio(1, 3)
     assert(
-      Money.dollars(100).applying(oneThird, 1, BigDecimal.RoundingMode.UP) == Money.dollars(33.40))
+      Money
+        .dollars(100)
+        .applying(oneThird, 1, BigDecimal.RoundingMode.UP) == Money
+        .dollars(33.40)
+    )
   }
 
   /**

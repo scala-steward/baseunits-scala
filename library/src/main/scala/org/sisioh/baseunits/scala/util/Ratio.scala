@@ -38,10 +38,7 @@ import annotation.tailrec
   * @param numerator   分子をあらわす数
   * @param denominator 分母をあらわす数
   */
-class Ratio(
-    val numerator: BigDecimal,
-    val denominator: BigDecimal
-) {
+class Ratio(private val numerator: BigDecimal, private val denominator: BigDecimal) {
 
   if (denominator == BigDecimal(0)) {
     throw new ArithmeticException("denominator is zero")
@@ -54,8 +51,7 @@ class Ratio(
     *
     * @return 分母をあらわず数
     */
-  @deprecated("Use denominator property instead", "0.1.18")
-  val breachEncapsulationOfDenominator = denominator
+  val breachEncapsulationOfDenominator: BigDecimal = denominator
 
   /**
     * このオブジェクトの`numerator`フィールド（分子をあらわす数）を返す。
@@ -64,8 +60,7 @@ class Ratio(
     *
     * @return 分子をあらわす数
     */
-  @deprecated("Use numerator property instead", "0.1.18")
-  val breachEncapsulationOfNumerator = numerator
+  val breachEncapsulationOfNumerator: BigDecimal = numerator
 
   /**
     * 比率を[[scala.math.BigDecimal]]型で取得する。
@@ -77,7 +72,8 @@ class Ratio(
   def decimalValue(scale: Int, roundingMode: BigDecimal.RoundingMode.Value): BigDecimal = {
     BigDecimal(
       numerator.bigDecimal
-        .divide(denominator.bigDecimal, scale, roundingMode.id))
+        .divide(denominator.bigDecimal, scale, roundingMode.id)
+    )
   }
 
   /**
@@ -137,7 +133,10 @@ class Ratio(
     * @return 積
     */
   def times(multiplier: Ratio): Ratio =
-    Ratio(numerator * multiplier.numerator, denominator * multiplier.denominator)
+    Ratio(
+      numerator * multiplier.numerator,
+      denominator * multiplier.denominator
+    )
 
   /**
     * この比率の文字列表現を取得する。

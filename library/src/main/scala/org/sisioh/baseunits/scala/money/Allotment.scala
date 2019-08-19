@@ -25,10 +25,7 @@ package org.sisioh.baseunits.scala.money
   * @param entity 割り当て対象
   * @param amount 金額
   */
-class Allotment[T] private[money] (
-    val entity: T,
-    val amount: Money
-) {
+class Allotment[T] private[money] (private val entity: T, private val amount: Money) {
 
   /**
     * このオブジェクトの`amount`フィールド（金額）を返す。
@@ -37,8 +34,7 @@ class Allotment[T] private[money] (
     *
     * @return 金額
     */
-  @deprecated("Use amount property instead", "0.1.18")
-  val breachEncapsulationOfAmount = amount
+  val breachEncapsulationOfAmount: Money = amount
 
   /**
     * このオブジェクトの`entity`フィールド（割り当て対象）を返す。
@@ -47,8 +43,7 @@ class Allotment[T] private[money] (
     *
     * @return 割り当て対象
     */
-  @deprecated("Use entity property instead", "0.1.18")
-  val breachEncapsulationOfEntity = entity
+  val breachEncapsulationOfEntity: T = entity
 
   override def equals(obj: Any): Boolean = obj match {
     case that: Allotment[T] => entity == that.entity && amount == that.amount
@@ -62,7 +57,7 @@ class Allotment[T] private[money] (
     *
     * @return 割り当て
     */
-  lazy val negated = new Allotment[T](entity, amount.negated)
+  lazy val negated: Allotment[T] = new Allotment[T](entity, amount.negated)
 
   def unary_- : Allotment[T] = negated
 
@@ -94,7 +89,7 @@ object Allotment {
     * @param allotment [[org.sisioh.baseunits.scala.money.Allotment]]
     * @return `Option[(T, Money)]`
     */
-  def unapplly[T](allotment: Allotment[T]): Option[(Any, Money)] =
+  def unapply[T](allotment: Allotment[T]): Option[(Any, Money)] =
     Some(allotment.entity, allotment.amount)
 
 }

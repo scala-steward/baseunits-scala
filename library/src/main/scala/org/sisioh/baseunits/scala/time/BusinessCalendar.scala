@@ -29,7 +29,9 @@ import org.sisioh.baseunits.scala.util.Specification
   *
   * @author j5ik2o
   */
-case class BusinessCalendar(holidaySpecs: Specification[CalendarDate] = DateSpecification.never) {
+case class BusinessCalendar(
+    private val holidaySpecs: Specification[CalendarDate] = DateSpecification.never
+) {
 
   /**
     * 休日として取り扱う「日」を追加する。
@@ -68,7 +70,9 @@ case class BusinessCalendar(holidaySpecs: Specification[CalendarDate] = DateSpec
     * @param calendarDays 元となる反復子
     * @return 営業日のみを返す反復子
     */
-  def businessDaysOnly(calendarDays: Iterator[CalendarDate]): Iterator[CalendarDate] = {
+  def businessDaysOnly(
+      calendarDays: Iterator[CalendarDate]
+  ): Iterator[CalendarDate] = {
     new Iterator[CalendarDate] {
 
       var lookAhead = nextBusinessDate

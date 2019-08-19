@@ -28,8 +28,8 @@ import java.util.{Calendar, GregorianCalendar, TimeZone}
   * @param calendarValue      [[java.util.Calendar]]に定義する月をあらわす定数値
   */
 sealed class MonthOfYear private[time] (
-    val lastDayOfThisMonth: DayOfMonth,
-    val calendarValue: Int
+    private val lastDayOfThisMonth: DayOfMonth,
+    private val calendarValue: Int
 ) {
 
   val value = calendarValue + 1
@@ -44,8 +44,7 @@ sealed class MonthOfYear private[time] (
     *
     * @return [[java.util.Calendar]]に定義する月をあらわす定数値（JANUARY〜DECEMBER）
     */
-  @deprecated("Use calendarValue property instead", "0.1.18")
-  val breachEncapsulationOfCalendarValue = calendarValue
+  val breachEncapsulationOfCalendarValue: Int = calendarValue
 
   /**
     * このオブジェクトの`value`フィールド（月をあらわす数 1〜12）を返す。
@@ -54,8 +53,7 @@ sealed class MonthOfYear private[time] (
     *
     * @return 月をあらわす数（1〜12）
     */
-  @deprecated("Use value property instead", "0.1.18")
-  val breachEncapsulationOfValue = calendarValue + 1
+  val breachEncapsulationOfValue: Int = calendarValue + 1
 
   /**
     * 指定した日 `other` が、このオブジェクトが表現する日よりも過去であるかどうかを検証する。
@@ -114,9 +112,7 @@ object MonthOfYear {
 
   def apply(month: Int): MonthOfYear = {
     Seq(Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec)
-      .find(
-        _.value == month
-      )
+      .find(_.value == month)
       .get
   }
 

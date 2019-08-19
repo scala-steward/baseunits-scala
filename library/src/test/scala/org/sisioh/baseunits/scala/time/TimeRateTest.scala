@@ -38,8 +38,8 @@ class TimeRateTest extends AssertionsForJUnit {
     assert(rate.over(Duration.hours(1)) == BigDecimal(6000.00))
 
     assert(rate.toString == "100.0 per 1 minute")
-    assert(rate.quantity == BigDecimal(100))
-    assert(rate.unit == Duration.minutes(1))
+    assert(rate.breachEncapsulationOfQuantity == BigDecimal(100))
+    assert(rate.breachEncapsulationOfUnit == Duration.minutes(1))
   }
 
   /**
@@ -52,7 +52,9 @@ class TimeRateTest extends AssertionsForJUnit {
     val rate = TimeRate(100.00, Duration.minutes(3))
     try {
       rate.over(Duration.minutes(1))
-      fail("ArtithmeticException should have been thrown. This case requires rounding.")
+      fail(
+        "ArtithmeticException should have been thrown. This case requires rounding."
+      )
     } catch {
       case _: ArithmeticException => // success
       case _: Throwable           => fail
@@ -67,7 +69,12 @@ class TimeRateTest extends AssertionsForJUnit {
   @Test
   def test03_RoundingRate {
     val rate = TimeRate("100.00", Duration.minutes(3))
-    assert(rate.over(Duration.minutes(1), BigDecimal.RoundingMode.DOWN) == BigDecimal("33.33"))
+    assert(
+      rate
+        .over(Duration.minutes(1), BigDecimal.RoundingMode.DOWN) == BigDecimal(
+        "33.33"
+      )
+    )
   }
 
   /**
@@ -78,7 +85,11 @@ class TimeRateTest extends AssertionsForJUnit {
   @Test
   def test04_RoundingScalingRate {
     val rate = TimeRate("100.00", Duration.minutes(3))
-    assert(rate.over(Duration.minutes(1), 3, BigDecimal.RoundingMode.DOWN) == BigDecimal("33.333"))
+    assert(
+      rate.over(Duration.minutes(1), 3, BigDecimal.RoundingMode.DOWN) == BigDecimal(
+        "33.333"
+      )
+    )
   }
 
   /**

@@ -26,7 +26,7 @@ package org.sisioh.baseunits.scala.time
   * @author j5ik2o
   * @param value 時をあらわす正数
   */
-class HourOfDay private (val value: Int) extends Ordered[HourOfDay] with Serializable {
+class HourOfDay private (private val value: Int) extends Ordered[HourOfDay] with Serializable {
 
   require(
     value >= HourOfDay.MIN && value <= HourOfDay.MAX,
@@ -41,8 +41,7 @@ class HourOfDay private (val value: Int) extends Ordered[HourOfDay] with Seriali
     *
     * @return 時をあらわす正数（0〜23）
     */
-  @deprecated("Use value property instead", "0.1.18")
-  val breachEncapsulationOfValue = value
+  val breachEncapsulationOfValue: Int = value
 
   override def compare(that: HourOfDay): Int = value - that.value
 

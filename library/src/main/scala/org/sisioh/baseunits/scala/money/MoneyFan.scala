@@ -28,23 +28,23 @@ import scala.collection.mutable.ArrayBuffer
   * @tparam T 割り当て対象
   * @param allotments 割り当ての要素（複数）
   */
-class MoneyFan[T](val allotments: Set[Allotment[T]]) extends Iterable[Allotment[T]] {
+class MoneyFan[T](val allotments: Allotments[T]) extends Iterable[Allotment[T]] {
 
   /**
     * インスタンスを生成する。
     *
     * `allotments`は空のインスタンスが利用される。
     */
-  def this() = this(Set.empty[Allotment[T]])
+  def this() = this(Allotments.empty[T])
 
   /**
     * インスタンスを生成する。
     *
     * @param allotment 割り当ての要素（単一)
     */
-  def this(allotment: Allotment[T]) = this(Set(allotment))
+  def this(allotment: Allotment[T]) = this(Allotments(allotment))
 
-  def iterator: Iterator[Allotment[T]] = allotments.iterator
+  def iterator: Iterator[Allotment[T]] = allotments.toIterator
 
   /**
     * `MoneyFan`が保持する `Allotment`のうち、割り当て対象が `anEntity`であるものを返す。
@@ -53,7 +53,7 @@ class MoneyFan[T](val allotments: Set[Allotment[T]]) extends Iterable[Allotment[
     * @return `Allotment`。見つからなかった場合は`None`
     */
   def allotment(anEntity: T): Option[Allotment[T]] =
-    allotments.find(_.entity == anEntity)
+    allotments.find(_.breachEncapsulationOfEntity == anEntity)
 
   override def hashCode: Int = 31 * allotments.hashCode
 
@@ -80,7 +80,7 @@ class MoneyFan[T](val allotments: Set[Allotment[T]]) extends Iterable[Allotment[
     * @return [[org.sisioh.baseunits.scala.money.MoneyFan]]
     */
   lazy val negated = {
-    val negatedAllotments = allotments.map(_.negated).toSet
+    val negatedAllotments = allotments.negated
     new MoneyFan[T](negatedAllotments)
   }
 
@@ -95,7 +95,8 @@ class MoneyFan[T](val allotments: Set[Allotment[T]]) extends Iterable[Allotment[
     * @return [[org.sisioh.baseunits.scala.money.MoneyFan]]
     */
   def plus(added: MoneyFan[T]): MoneyFan[T] = {
-    val allEntities = allotments.map(_.entity) ++ added.allotments.map(_.entity)
+    val allEntities =
+      (allotments ++ added.allotments).toSeq.map(_.breachEncapsulationOfEntity)
     val summedAllotments = allEntities.map { entity =>
       allotment(entity) match {
         case None => added.allotment(entity).get
@@ -103,14 +104,16 @@ class MoneyFan[T](val allotments: Set[Allotment[T]]) extends Iterable[Allotment[
           added.allotment(entity) match {
             case None => thisAllotment
             case Some(addedAllotment) => {
-              val sum = thisAllotment.amount.plus(addedAllotment.amount)
+              val sum = thisAllotment.breachEncapsulationOfAmount.plus(
+                addedAllotment.breachEncapsulationOfAmount
+              )
               new Allotment[T](entity, sum)
             }
           }
         }
       }
     }
-    new MoneyFan[T](summedAllotments).withoutZeros
+    new MoneyFan[T](Allotments(summedAllotments: _*)).withoutZeros
   }
 
   def +(added: MoneyFan[T]): MoneyFan[T] = plus(added)
@@ -122,10 +125,10 @@ class MoneyFan[T](val allotments: Set[Allotment[T]]) extends Iterable[Allotment[
     *
     * @return 合計額
     */
-  lazy val total = asTally.net
+  lazy val total: Money = asTally.net
 
   private def asTally = {
-    new Tally(allotments.toVector.map(_.amount))
+    new Tally(allotments.toVector.map(_.breachEncapsulationOfAmount))
   }
 
   /**
@@ -135,7 +138,8 @@ class MoneyFan[T](val allotments: Set[Allotment[T]]) extends Iterable[Allotment[
     * @return [[org.sisioh.baseunits.scala.money.MoneyFan]]
     */
   private lazy val withoutZeros = {
-    val nonZeroAllotments = allotments.filter(_.amount.isZero == false).toSet
+    val nonZeroAllotments =
+      allotments.filter(_.breachEncapsulationOfAmount.isZero == false)
     new MoneyFan[T](nonZeroAllotments)
   }
 }
@@ -154,7 +158,7 @@ object MoneyFan {
     * @return [[org.sisioh.baseunits.scala.money.MoneyFan]]
     */
   def apply[T](allotments: Set[Allotment[T]]): MoneyFan[T] =
-    new MoneyFan[T](allotments)
+    new MoneyFan[T](Allotments(allotments.toSeq: _*))
 
   /**
     * インスタンスを生成する。
@@ -178,7 +182,7 @@ object MoneyFan {
     * @param moneyFan [[MoneyFan]]
     * @return `Option[Set[Allotment[T]]]`
     */
-  def unapply[T](moneyFan: MoneyFan[T]): Option[Set[Allotment[T]]] =
+  def unapply[T](moneyFan: MoneyFan[T]): Option[Allotments[T]] =
     Some(moneyFan.allotments)
 
 }

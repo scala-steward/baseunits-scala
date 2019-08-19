@@ -118,9 +118,14 @@ class TimeOfDayTest extends AssertionsForJUnit {
     */
   @Test
   def test06_AfterWithEarlierTimeOfDay {
-    assert(twoMinutesBeforeMidnight.isAfter(midnight) == true,
-           "expected twoMinutesBeforeMidnight to be after midnight")
-    assert(afternoon.isAfter(morning) == true, "expected afternoon to be after morning")
+    assert(
+      twoMinutesBeforeMidnight.isAfter(midnight) == true,
+      "expected twoMinutesBeforeMidnight to be after midnight"
+    )
+    assert(
+      afternoon.isAfter(morning) == true,
+      "expected afternoon to be after morning"
+    )
     assert(noon.isAfter(midnight) == true, "expected noon to be after midnight")
   }
 
@@ -131,11 +136,18 @@ class TimeOfDayTest extends AssertionsForJUnit {
     */
   @Test
   def test07_AfterWithLaterTimeOfDay {
-    assert(midnight.isAfter(twoMinutesBeforeMidnight) == false,
-           "expected midnight not after twoMinutesBeforeMidnight")
-    assert(morning.isAfter(afternoon) == false, "expected morning not after afternoon")
-    assert(noon.isAfter(twoMinutesBeforeMidnight) == false,
-           "expected noon not after twoMinutesBeforeMidnight")
+    assert(
+      midnight.isAfter(twoMinutesBeforeMidnight) == false,
+      "expected midnight not after twoMinutesBeforeMidnight"
+    )
+    assert(
+      morning.isAfter(afternoon) == false,
+      "expected morning not after afternoon"
+    )
+    assert(
+      noon.isAfter(twoMinutesBeforeMidnight) == false,
+      "expected noon not after twoMinutesBeforeMidnight"
+    )
   }
 
   /**
@@ -145,9 +157,18 @@ class TimeOfDayTest extends AssertionsForJUnit {
     */
   @Test
   def test08_AfterWithSameTimeOfDay {
-    assert(midnight.isAfter(midnight) == false, "expected midnight not after midnight")
-    assert(morning.isAfter(morning) == false, "expected morning not after morning")
-    assert(afternoon.isAfter(afternoon) == false, "expected afternoon not after afternoon")
+    assert(
+      midnight.isAfter(midnight) == false,
+      "expected midnight not after midnight"
+    )
+    assert(
+      morning.isAfter(morning) == false,
+      "expected morning not after morning"
+    )
+    assert(
+      afternoon.isAfter(afternoon) == false,
+      "expected afternoon not after afternoon"
+    )
     assert(noon.isAfter(noon) == false, "expected noon not after noon")
   }
 
@@ -158,9 +179,14 @@ class TimeOfDayTest extends AssertionsForJUnit {
     */
   @Test
   def test09_BeforeWithEarlierTimeOfDay {
-    assert(twoMinutesBeforeMidnight.isBefore(midnight) == false,
-           "expected twoMinutesBeforeMidnight not after midnight")
-    assert(afternoon.isBefore(morning) == false, "expected afternoon not after morning")
+    assert(
+      twoMinutesBeforeMidnight.isBefore(midnight) == false,
+      "expected twoMinutesBeforeMidnight not after midnight"
+    )
+    assert(
+      afternoon.isBefore(morning) == false,
+      "expected afternoon not after morning"
+    )
     assert(noon.isBefore(midnight) == false, "expected noon not after midnight")
   }
 
@@ -171,11 +197,15 @@ class TimeOfDayTest extends AssertionsForJUnit {
     */
   @Test
   def test10_BeforeWithLaterTimeOfDay() {
-    assert(midnight.isBefore(twoMinutesBeforeMidnight),
-           "expected midnight not after twoMinutesBeforeMidnight")
+    assert(
+      midnight.isBefore(twoMinutesBeforeMidnight),
+      "expected midnight not after twoMinutesBeforeMidnight"
+    )
     assert(morning.isBefore(afternoon), "expected morning not after afternoon")
-    assert(noon.isBefore(twoMinutesBeforeMidnight),
-           "expected noon not after twoMinutesBeforeMidnight")
+    assert(
+      noon.isBefore(twoMinutesBeforeMidnight),
+      "expected noon not after twoMinutesBeforeMidnight"
+    )
   }
 
   /**
@@ -187,7 +217,10 @@ class TimeOfDayTest extends AssertionsForJUnit {
   def test11_BeforeWithSameTimeOfDay() {
     assert(!midnight.isBefore(midnight), "expected midnight not after midnight")
     assert(!morning.isBefore(morning), "expected morning not after morning")
-    assert(!afternoon.isBefore(afternoon), "expected afternoon not after afternoon")
+    assert(
+      !afternoon.isBefore(afternoon),
+      "expected afternoon not after afternoon"
+    )
     assert(!noon.isBefore(noon), "expected noon not after noon")
   }
 
@@ -198,11 +231,11 @@ class TimeOfDayTest extends AssertionsForJUnit {
     */
   @Test
   def test12_GetHour {
-    assert(midnight.hour == HourOfDay(0))
-    assert(morning.hour == HourOfDay(10))
-    assert(noon.hour == HourOfDay(12))
-    assert(afternoon.hour == HourOfDay(15))
-    assert(twoMinutesBeforeMidnight.hour == HourOfDay(23))
+    assert(midnight.breachEncapsulationOfHour == HourOfDay(0))
+    assert(morning.breachEncapsulationOfHour == HourOfDay(10))
+    assert(noon.breachEncapsulationOfHour == HourOfDay(12))
+    assert(afternoon.breachEncapsulationOfHour == HourOfDay(15))
+    assert(twoMinutesBeforeMidnight.breachEncapsulationOfHour == HourOfDay(23))
   }
 
   /**
@@ -212,11 +245,13 @@ class TimeOfDayTest extends AssertionsForJUnit {
     */
   @Test
   def test13_GetMinute {
-    assert(midnight.minute == MinuteOfHour(0))
-    assert(morning.minute == MinuteOfHour(20))
-    assert(noon.minute == MinuteOfHour(0))
-    assert(afternoon.minute == MinuteOfHour(40))
-    assert(twoMinutesBeforeMidnight.minute == MinuteOfHour(58))
+    assert(midnight.breachEncapsulationOfMinute == MinuteOfHour(0))
+    assert(morning.breachEncapsulationOfMinute == MinuteOfHour(20))
+    assert(noon.breachEncapsulationOfMinute == MinuteOfHour(0))
+    assert(afternoon.breachEncapsulationOfMinute == MinuteOfHour(40))
+    assert(
+      twoMinutesBeforeMidnight.breachEncapsulationOfMinute == MinuteOfHour(58)
+    )
   }
 
   /**
@@ -226,9 +261,13 @@ class TimeOfDayTest extends AssertionsForJUnit {
     */
   @Test
   def test14_AsTimePoint {
-    val fiveFifteen              = TimeOfDay.from(17, 15)
-    val mayEleventh              = CalendarDate.from(2006, 5, 11)
-    val mayEleventhAtFiveFifteen = fiveFifteen.asTimePointGiven(mayEleventh, CST.toZoneId)
-    assert(mayEleventhAtFiveFifteen == TimePoint.at(2006, 5, 11, 17, 15, 0, 0, CST.toZoneId))
+    val fiveFifteen = TimeOfDay.from(17, 15)
+    val mayEleventh = CalendarDate.from(2006, 5, 11)
+    val mayEleventhAtFiveFifteen =
+      fiveFifteen.asTimePointGiven(mayEleventh, CST.toZoneId)
+    assert(
+      mayEleventhAtFiveFifteen == TimePoint
+        .at(2006, 5, 11, 17, 15, 0, 0, CST.toZoneId)
+    )
   }
 }

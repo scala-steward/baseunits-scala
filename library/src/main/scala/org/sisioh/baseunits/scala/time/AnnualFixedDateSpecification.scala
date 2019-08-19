@@ -36,7 +36,7 @@ class AnnualFixedDateSpecification private[time] (
 
   override def isSatisfiedBy(date: CalendarDate): Boolean = {
     day == date.day &&
-    month == date.asCalendarMonth.month
+    month == date.asCalendarMonth.breachEncapsulationOfMonth
   }
 
   override def ofYear(year: Int): CalendarDate =

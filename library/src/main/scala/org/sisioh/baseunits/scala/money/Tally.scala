@@ -39,14 +39,14 @@ class Tally(private[money] val monies: Iterable[Money]) extends Iterable[Money] 
 
   private[this] val _currency = currency
 
-  require(monies.exists(_.currency == _currency))
+  require(monies.exists(_.breachEncapsulationOfCurrency == _currency))
 
   /**
     * 通貨単位を返す。
     * @return 通貨単位
     */
   lazy val currency: Currency =
-    monies.head.currency
+    monies.head.breachEncapsulationOfCurrency
 
   /**
     * 合計金額を返す。

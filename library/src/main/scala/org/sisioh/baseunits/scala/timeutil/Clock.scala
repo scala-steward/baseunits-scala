@@ -28,7 +28,7 @@ import org.sisioh.baseunits.scala.time._
   *
   * @author j5ik2o
   */
-case class Clock(timeSource: TimeSource = SystemClock, zoneId: ZoneId) {
+case class Clock(private val timeSource: TimeSource = SystemClock, private val zoneId: ZoneId) {
 
   /**
     * 現在時刻を取得する。
@@ -71,7 +71,11 @@ case class Clock(timeSource: TimeSource = SystemClock, zoneId: ZoneId) {
     *
     * @return 今年
     */
-  def year: Int = month.year
+  def year: Int = month.breachEncapsulationOfYear
+
+  val breachEncapsulationOfTimeSource: TimeSource = timeSource
+
+  val breachEncapsulationOfZoneId: ZoneId = zoneId
 
 }
 

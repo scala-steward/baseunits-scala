@@ -18,10 +18,12 @@
  */
 package org.sisioh.baseunits.scala.money
 
-import java.util.{Locale, Currency}
+import java.util.{Currency, Locale}
+
 import org.sisioh.baseunits.scala.util.Ratio
 import org.sisioh.baseunits.scala.time.Duration
-import math.BigDecimal.RoundingMode
+
+import scala.math.BigDecimal
 
 /**
   * 金額を表すクラス。
@@ -32,12 +34,14 @@ import math.BigDecimal.RoundingMode
   * @param amount 量 [[scala.math.BigDecimal]]
   * @param currency 通貨単位 [[java.util.Currency]]
   */
-class Money(val amount: BigDecimal, val currency: Currency)
+class Money(private val amount: BigDecimal, private val currency: Currency)
     extends Ordered[Money]
     with Serializable {
 
-  require(amount.scale == currency.getDefaultFractionDigits,
-          "Scale of amount does not match currency")
+  require(
+    amount.scale == currency.getDefaultFractionDigits,
+    "Scale of amount does not match currency"
+  )
 
   override def equals(obj: Any): Boolean = obj match {
     case that: Money => amount == that.amount && currency == that.currency
@@ -97,7 +101,9 @@ class Money(val amount: BigDecimal, val currency: Currency)
     * @param roundingMode 丸めモード
     * @return 指定した割合の金額
     */
-  def applying(ratio: Ratio, scale: Int, roundingMode: BigDecimal.RoundingMode.Value): Money = {
+  def applying(ratio: Ratio,
+               scale: Int,
+               roundingMode: BigDecimal.RoundingMode.Value): Money = {
     val newAmount = ratio.times(amount).decimalValue(scale, roundingMode)
     Money.adjustBy(newAmount, currency)
   }
@@ -109,7 +115,8 @@ class Money(val amount: BigDecimal, val currency: Currency)
     * @param roundingMode 丸めモード
     * @return 指定した割合の金額
     */
-  def applying(ratio: Ratio, roundingMode: BigDecimal.RoundingMode.Value): Money =
+  def applying(ratio: Ratio,
+               roundingMode: BigDecimal.RoundingMode.Value): Money =
     applying(ratio, currency.getDefaultFractionDigits, roundingMode)
 
   /**
@@ -126,8 +133,7 @@ class Money(val amount: BigDecimal, val currency: Currency)
     *
     * @return 量
     */
-  @deprecated("Use amount property instead", "0.1.18")
-  val breachEncapsulationOfAmount = amount
+  val breachEncapsulationOfAmount: BigDecimal = amount
 
   /**
     * このオブジェクトの`currency`フィールド（通貨単位）を返す。
@@ -136,8 +142,7 @@ class Money(val amount: BigDecimal, val currency: Currency)
     *
     * @return 通貨単位
     */
-  @deprecated("Use currency property instead", "0.1.18")
-  val breachEncapsulationOfCurrency = currency
+  val breachEncapsulationOfCurrency: Currency = currency
 
   /**
     * この金額を、`divisor`個に均等に分割した場合の金額を返す。
@@ -157,7 +162,8 @@ class Money(val amount: BigDecimal, val currency: Currency)
     * @param roundingMode 丸めモード
     * @return 金額
     */
-  def dividedBy(divisor: BigDecimal, roundingMode: BigDecimal.RoundingMode.Value): Money = {
+  def dividedBy(divisor: BigDecimal,
+                roundingMode: BigDecimal.RoundingMode.Value): Money = {
     val newAmount =
       amount.bigDecimal.divide(divisor.bigDecimal, roundingMode.id)
     Money(BigDecimal(newAmount), currency)
@@ -170,7 +176,8 @@ class Money(val amount: BigDecimal, val currency: Currency)
     * @param roundingMode 丸めモード
     * @return 金額
     */
-  def dividedBy(divisor: Double, roundingMode: BigDecimal.RoundingMode.Value): Money =
+  def dividedBy(divisor: Double,
+                roundingMode: BigDecimal.RoundingMode.Value): Money =
     dividedBy(BigDecimal(divisor), roundingMode)
 
   /**
@@ -302,7 +309,8 @@ class Money(val amount: BigDecimal, val currency: Currency)
     * @param roundingMode 丸めモード
     * @return 掛けた金額
     */
-  def times(factor: BigDecimal, roundingMode: BigDecimal.RoundingMode.Value): Money =
+  def times(factor: BigDecimal,
+            roundingMode: BigDecimal.RoundingMode.Value): Money =
     Money.adjustBy(amount * factor, currency, roundingMode)
 
   /**
@@ -323,7 +331,8 @@ class Money(val amount: BigDecimal, val currency: Currency)
     * @param roundingMode 丸めモード
     * @return 掛けた金額
     */
-  def times(amount: Double, roundingMode: BigDecimal.RoundingMode.Value): Money =
+  def times(amount: Double,
+            roundingMode: BigDecimal.RoundingMode.Value): Money =
     times(BigDecimal(amount), roundingMode)
 
   /**
@@ -386,7 +395,8 @@ class Money(val amount: BigDecimal, val currency: Currency)
   private def checkHasSameCurrencyAs(aMoney: Money): Unit = {
     if (!hasSameCurrencyAs(aMoney)) {
       throw new ClassCastException(
-        aMoney.toString() + " is not same currency as " + this.toString())
+        aMoney.toString() + " is not same currency as " + this.toString()
+      )
     }
   }
 
@@ -407,7 +417,8 @@ object Money {
 
   val JPY = Currency.getInstance("JPY")
 
-  val DefaultRoundingMode = BigDecimal.RoundingMode.HALF_EVEN
+  val DefaultRoundingMode: BigDecimal.RoundingMode.Value =
+    BigDecimal.RoundingMode.HALF_EVEN
 
   def apply(amount: BigDecimal, currency: Currency): Money =
     new Money(amount, currency)

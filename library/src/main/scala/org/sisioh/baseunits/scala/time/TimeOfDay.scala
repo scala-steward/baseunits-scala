@@ -29,13 +29,15 @@ import java.util.TimeZone
   * @param hour   時
   * @param minute 分
   */
-class TimeOfDay private[time] (
-    val hour: HourOfDay,
-    val minute: MinuteOfHour
-) extends Ordered[TimeOfDay]
+class TimeOfDay private[time] (private val hour: HourOfDay, private val minute: MinuteOfHour)
+    extends Ordered[TimeOfDay]
     with Serializable {
 
-  lazy val asLocalTime: LocalTime = LocalTime.of(hour.value, minute.value)
+  lazy val asLocalTime: LocalTime =
+    LocalTime.of(
+      hour.breachEncapsulationOfValue,
+      minute.breachEncapsulationOfValue
+    )
 
   /**
     * 指定した年月日とタイムゾーンにおける、このインスタンスがあらわす時分の0秒0ミリ秒の瞬間について
@@ -45,7 +47,10 @@ class TimeOfDay private[time] (
     * @param timeZone タイムゾーン
     * @return 瞬間
     */
-  @deprecated("Use asTimePointGiven(date: CalendarDate, zoneId: ZoneId) method instead", "0.1.18")
+  @deprecated(
+    "Use asTimePointGiven(date: CalendarDate, zoneId: ZoneId) method instead",
+    "0.1.18"
+  )
   def asTimePointGiven(date: CalendarDate, timeZone: TimeZone): TimePoint =
     asTimePointGiven(date, timeZone.toZoneId)
 
@@ -61,8 +66,7 @@ class TimeOfDay private[time] (
     *
     * @return 時
     */
-  @deprecated("Use hour property instead", "0.1.18")
-  val breachEncapsulationOfHour = hour
+  val breachEncapsulationOfHour: HourOfDay = hour
 
   /**
     * このオブジェクトの`minute`フィールド（分）を返す。
@@ -71,8 +75,7 @@ class TimeOfDay private[time] (
     *
     * @return 分
     */
-  @deprecated("Use minute property instead", "0.1.18")
-  val breachEncapsulationOfMinute = minute
+  val breachEncapsulationOfMinute: MinuteOfHour = minute
 
   override def compare(other: TimeOfDay): Int = {
     val hourComparance = hour compare other.hour
@@ -96,7 +99,9 @@ class TimeOfDay private[time] (
     * @return 未来である場合は`true`、そうでない場合は`false`
     */
   def isAfter(another: TimeOfDay): Boolean = {
-    hour.isAfter(another.hour) || (hour == another.hour && minute.isAfter(another.minute))
+    hour.isAfter(another.hour) || (hour == another.hour && minute.isAfter(
+      another.minute
+    ))
   }
 
   /**
@@ -108,7 +113,9 @@ class TimeOfDay private[time] (
     * @return 過去である場合は`true`、そうでない場合は`false`
     */
   def isBefore(another: TimeOfDay): Boolean = {
-    hour.isBefore(another.hour) || (hour == another.hour && minute.isBefore(another.minute))
+    hour.isBefore(another.hour) || (hour == another.hour && minute.isBefore(
+      another.minute
+    ))
   }
 
   /**

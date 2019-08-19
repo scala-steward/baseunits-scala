@@ -70,11 +70,15 @@ object LimitValue {
     * @return [[org.sisioh.baseunits.scala.intervals.Limit]]
     * @throws IllegalArgumentException limitValueがLimitless[T]の場合
     */
-  implicit def toValue[T](limitValue: LimitValue[T])(implicit ev: T => Ordered[T]): T =
+  implicit def toValue[T](
+      limitValue: LimitValue[T]
+  )(implicit ev: T => Ordered[T]): T =
     limitValue match {
       case Limit(value) => value
       case _: Limitless[T] =>
-        throw new IllegalArgumentException("implicit conversion from Limitless[T] can't do.")
+        throw new IllegalArgumentException(
+          "implicit conversion from Limitless[T] can't do."
+        )
     }
 
   /**
@@ -83,7 +87,9 @@ object LimitValue {
     * @param value 値
     * @return [[org.sisioh.baseunits.scala.intervals.Limit]]
     */
-  def toLimitValue[T](value: Option[T])(implicit ev: T => Ordered[T]): LimitValue[T] =
+  def toLimitValue[T](
+      value: Option[T]
+  )(implicit ev: T => Ordered[T]): LimitValue[T] =
     value match {
       case None    => Limitless[T]()
       case Some(v) => Limit(v)
@@ -148,9 +154,9 @@ case class Limitless[T]()(implicit ev: T => Ordered[T]) extends LimitValue[T] {
   * @param value 限界値 [[org.sisioh.baseunits.scala.intervals.Limitless]]の場合は、限界がないことを表す。
   */
 class IntervalLimit[T](
-    val closed: Boolean,
-    val lower: Boolean,
-    val value: LimitValue[T]
+    private[intervals] val closed: Boolean,
+    private[intervals] val lower: Boolean,
+    private[intervals] val value: LimitValue[T]
 )(implicit ev: T => Ordered[T])
     extends Ordered[IntervalLimit[T]]
     with Serializable {
@@ -261,8 +267,13 @@ object IntervalLimit {
     * @param value 限界値. `Limitless[T]`の場合は、限界がないことを表す
     */
   def apply[T](closed: Boolean, lower: Boolean, value: LimitValue[T])(
-      implicit ev: T => Ordered[T]): IntervalLimit[T] =
-    new IntervalLimit[T](if (value.isInstanceOf[Limitless[_]]) false else closed, lower, value)
+      implicit ev: T => Ordered[T]
+  ): IntervalLimit[T] =
+    new IntervalLimit[T](
+      if (value.isInstanceOf[Limitless[_]]) false else closed,
+      lower,
+      value
+    )
 
   /**
     * 抽出子メソッド。
@@ -271,8 +282,9 @@ object IntervalLimit {
     * @param intervalLimit [[org.sisioh.baseunits.scala.intervals.IntervalLimit]]
     * @return Option[(Boolean, Boolean, T)]
     */
-  def unapply[T](intervalLimit: IntervalLimit[T])(
-      implicit ev: T => Ordered[T]): Option[(Boolean, Boolean, LimitValue[T])] =
+  def unapply[T](
+      intervalLimit: IntervalLimit[T]
+  )(implicit ev: T => Ordered[T]): Option[(Boolean, Boolean, LimitValue[T])] =
     Some(intervalLimit.closed, intervalLimit.lower, intervalLimit.value)
 
   /**
@@ -284,7 +296,8 @@ object IntervalLimit {
     * @return 下側限界インスタンス
     */
   def lower[T](closed: Boolean, value: LimitValue[T])(
-      implicit ev: T => Ordered[T]): IntervalLimit[T] =
+      implicit ev: T => Ordered[T]
+  ): IntervalLimit[T] =
     apply(closed, true, value)
 
   /**
@@ -296,7 +309,8 @@ object IntervalLimit {
     * @return 上側限界インスタンス
     */
   def upper[T](closed: Boolean, value: LimitValue[T])(
-      implicit ev: T => Ordered[T]): IntervalLimit[T] =
+      implicit ev: T => Ordered[T]
+  ): IntervalLimit[T] =
     apply(closed, false, value)
 
 }

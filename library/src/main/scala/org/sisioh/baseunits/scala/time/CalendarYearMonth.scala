@@ -31,11 +31,10 @@ import java.util.{Calendar, TimeZone}
   *
   * @author j5ik2o
   */
-class CalendarYearMonth private[time] (
-    val year: Int,
-    val month: MonthOfYear,
-    val zoneId: ZoneId
-) extends Ordered[CalendarYearMonth]
+class CalendarYearMonth private[time] (private val year: Int,
+                                       private val month: MonthOfYear,
+                                       private val zoneId: ZoneId)
+    extends Ordered[CalendarYearMonth]
     with Serializable {
 
   lazy val asYearMonth: YearMonth = YearMonth.of(year, month.value)
@@ -68,7 +67,7 @@ class CalendarYearMonth private[time] (
     *
     * @return [[org.sisioh.baseunits.scala.time.DayOfMonth]]
     */
-  lazy val lastDay =
+  lazy val lastDay: CalendarDate =
     CalendarDate.from(year, month, lastDayOfMonth, zoneId)
 
   /**
@@ -106,8 +105,7 @@ class CalendarYearMonth private[time] (
     *
     * @return 月
     */
-  @deprecated("Use month property instead", "0.1.18")
-  val breachEncapsulationOfMonth = month
+  val breachEncapsulationOfMonth: MonthOfYear = month
 
   /**
     * このオブジェクトの`year`フィールド（西暦年をあらわす数）を返す。
@@ -116,8 +114,9 @@ class CalendarYearMonth private[time] (
     *
     * @return 西暦年をあらわす数
     */
-  @deprecated("Use year property instead", "0.1.18")
-  val breachEncapsulationOfYear = year
+  val breachEncapsulationOfYear: Int = year
+
+  val breachEncapsulationOfZoneId: ZoneId = zoneId
 
   /**
     * このインスタンスが表す年月で、引数`day`で表す日を表す年月日を返す。
@@ -209,7 +208,7 @@ class CalendarYearMonth private[time] (
   def asJavaCalendarOnMidnight(timeZone: TimeZone): Calendar = {
     val calendar = Calendar.getInstance(timeZone)
     calendar.set(Calendar.YEAR, year)
-    calendar.set(Calendar.MONTH, month.calendarValue)
+    calendar.set(Calendar.MONTH, month.breachEncapsulationOfCalendarValue)
     calendar.set(Calendar.DATE, 1)
     calendar.set(Calendar.HOUR_OF_DAY, 0)
     calendar.set(Calendar.MINUTE, 0)
@@ -272,7 +271,10 @@ object CalendarYearMonth {
     * @param month 月
     * @return [[org.sisioh.baseunits.scala.time.CalendarYearMonth]]
     */
-  @deprecated("Use apply(year: Int, month: Int, zoneId: ZoneId) method instead", "0.1.18")
+  @deprecated(
+    "Use apply(year: Int, month: Int, zoneId: ZoneId) method instead",
+    "0.1.18"
+  )
   def apply(year: Int, month: Int, timeZone: TimeZone): CalendarYearMonth =
     from(year, month, timeZone.toZoneId)
 
@@ -288,7 +290,10 @@ object CalendarYearMonth {
     * @return [[CalendarDate]]
     * @throws IllegalArgumentException 引数`month`が1〜12の範囲ではない場合
     */
-  @deprecated("Use from(year: Int, month: Int, zoneId: ZoneId) method instead", "0.1.18")
+  @deprecated(
+    "Use from(year: Int, month: Int, zoneId: ZoneId) method instead",
+    "0.1.18"
+  )
   def from(year: Int, month: Int, timeZone: TimeZone): CalendarYearMonth =
     new CalendarYearMonth(year, MonthOfYear(month), timeZone.toZoneId)
 
@@ -333,7 +338,10 @@ object CalendarYearMonth {
     * @param timeZone タイムゾーン
     * @return [[CalendarYearMonth]]
     */
-  @deprecated("Use from(year: Int, month: MonthOfYear, zoneId: ZoneId) method instead", "0.1.18")
+  @deprecated(
+    "Use from(year: Int, month: MonthOfYear, zoneId: ZoneId) method instead",
+    "0.1.18"
+  )
   def from(year: Int, month: MonthOfYear, timeZone: TimeZone): CalendarYearMonth =
     new CalendarYearMonth(year, month, timeZone.toZoneId)
 
@@ -348,8 +356,10 @@ object CalendarYearMonth {
     * @return [[CalendarYearMonth]]
     * @throws ParseException 文字列の解析に失敗した場合
     */
-  @deprecated("Use parse(dateString: String, pattern: String, zoneId: ZoneId) method instead",
-              "0.1.18")
+  @deprecated(
+    "Use parse(dateString: String, pattern: String, zoneId: ZoneId) method instead",
+    "0.1.18"
+  )
   def parse(dateString: String, pattern: String, timeZone: TimeZone): CalendarYearMonth = {
     //Any timezone works, as long as the same one is used throughout.
     val point = TimePoint.parse(dateString, pattern, timeZone)
@@ -371,7 +381,10 @@ object CalendarYearMonth {
     * @param timePoint 瞬間
     * @return [[CalendarDate]]
     */
-  @deprecated("Use from(timePoint: TimePoint, zoneId: ZoneId) method instead", "0.1.18")
+  @deprecated(
+    "Use from(timePoint: TimePoint, zoneId: ZoneId) method instead",
+    "0.1.18"
+  )
   def from(timePoint: TimePoint, timeZone: TimeZone): CalendarYearMonth =
     from(timePoint, timeZone.toZoneId)
 
