@@ -15,6 +15,7 @@ Library is no longer active.
 
 Scala version of this library
 
+[![CircleCI](https://circleci.com/gh/sisioh/baseunits-scala/tree/develop.svg?style=svg&circle-token=434850c0b6bedeed451a8aef2ec8a0274c256b9c)]
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.sisioh/baseunits-scala_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.sisioh/baseunits-scala_2.11)
 [![Scaladoc](http://javadoc-badge.appspot.com/org.sisioh/baseunits-scala.svg?label=scaladoc)](http://javadoc-badge.appspot.com/org.sisioh/baseunits-scala_2.11)
 [![Reference Status](https://www.versioneye.com/java/org.sisioh:baseunits-scala_2.11/reference_badge.svg?style=flat)](https://www.versioneye.com/java/org.sisioh:baseunits-scala_2.11/references)
