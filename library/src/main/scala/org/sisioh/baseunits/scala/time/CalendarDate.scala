@@ -33,9 +33,9 @@ import org.sisioh.baseunits.scala.intervals.Limit
   *
   * @author j5ik2o
   */
-class CalendarDate private[time] (val yearMonth: CalendarYearMonth,
-                                  val day: DayOfMonth,
-                                  val zoneId: ZoneId)
+class CalendarDate private[time] (private val yearMonth: CalendarYearMonth,
+                                  private val day: DayOfMonth,
+                                  private val zoneId: ZoneId)
     extends Ordered[CalendarDate]
     with Serializable {
 
@@ -126,7 +126,6 @@ class CalendarDate private[time] (val yearMonth: CalendarYearMonth,
     *
     * @return 日
     */
-  @deprecated("Use day property instead", "0.1.18")
   val breachEncapsulationOfDay: DayOfMonth = day
 
   /**
@@ -136,8 +135,9 @@ class CalendarDate private[time] (val yearMonth: CalendarYearMonth,
     *
     * @return 年月
     */
-  @deprecated("Use yearMonth property instead", "0.1.18")
   val breachEncapsulationOfYearMonth: CalendarYearMonth = yearMonth
+
+  val breachEncapsulationOfZoneId: ZoneId = zoneId
 
   /**
     * この日付の曜日を返す。

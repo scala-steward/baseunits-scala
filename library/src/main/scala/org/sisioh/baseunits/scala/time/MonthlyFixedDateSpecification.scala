@@ -29,7 +29,7 @@ class MonthlyFixedDateSpecification private[time] (
 ) extends MonthlyDateSpecification {
 
   override def isSatisfiedBy(date: CalendarDate): Boolean =
-    day == date.day
+    day == date.breachEncapsulationOfDay
 
   override def ofYearMonth(month: CalendarYearMonth): CalendarDate =
     CalendarDate.from(

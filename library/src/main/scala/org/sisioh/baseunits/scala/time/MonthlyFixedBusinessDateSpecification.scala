@@ -62,7 +62,7 @@ class MonthlyFixedBusinessDateSpecification(val day: DayOfMonth,
 
   override def isSatisfiedBy(date: CalendarDate): Boolean =
     if (cal.isBusinessDay(date)) {
-      val thisMonth = ofYearMonth(date.yearMonth)
+      val thisMonth = ofYearMonth(date.breachEncapsulationOfYearMonth)
       thisMonth.equals(date)
     } else false
 

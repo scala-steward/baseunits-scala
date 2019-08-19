@@ -746,7 +746,7 @@ object TimePoint {
   def atMidnight(calendarDate: CalendarDate, timeZone: TimeZone): TimePoint =
     at(
       calendarDate.asCalendarMonth,
-      calendarDate.day,
+      calendarDate.breachEncapsulationOfDay,
       0,
       0,
       0,
@@ -755,7 +755,15 @@ object TimePoint {
     )
 
   def atMidnight(calendarDate: CalendarDate, zoneId: ZoneId): TimePoint =
-    at(calendarDate.asCalendarMonth, calendarDate.day, 0, 0, 0, 0, zoneId)
+    at(
+      calendarDate.asCalendarMonth,
+      calendarDate.breachEncapsulationOfDay,
+      0,
+      0,
+      0,
+      0,
+      zoneId
+    )
 
   /**
     * デフォルトタイムゾーンにおける、指定した日付の午前0時（深夜）を表すインスタンスを取得する。
@@ -821,7 +829,7 @@ object TimePoint {
   def from(date: CalendarDate, time: TimeOfDay, timeZone: TimeZone): TimePoint =
     at(
       date.asCalendarMonth,
-      date.day,
+      date.breachEncapsulationOfDay,
       time.breachEncapsulationOfHour.breachEncapsulationOfValue,
       time.breachEncapsulationOfMinute.breachEncapsulationOfValue,
       0,
@@ -832,7 +840,7 @@ object TimePoint {
   def from(date: CalendarDate, time: TimeOfDay, zoneId: ZoneId): TimePoint =
     at(
       date.asCalendarMonth,
-      date.day,
+      date.breachEncapsulationOfDay,
       time.breachEncapsulationOfHour.breachEncapsulationOfValue,
       time.breachEncapsulationOfMinute.breachEncapsulationOfValue,
       0,

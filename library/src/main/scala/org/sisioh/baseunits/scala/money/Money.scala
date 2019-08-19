@@ -101,9 +101,7 @@ class Money(private val amount: BigDecimal, private val currency: Currency)
     * @param roundingMode 丸めモード
     * @return 指定した割合の金額
     */
-  def applying(ratio: Ratio,
-               scale: Int,
-               roundingMode: BigDecimal.RoundingMode.Value): Money = {
+  def applying(ratio: Ratio, scale: Int, roundingMode: BigDecimal.RoundingMode.Value): Money = {
     val newAmount = ratio.times(amount).decimalValue(scale, roundingMode)
     Money.adjustBy(newAmount, currency)
   }
@@ -115,8 +113,7 @@ class Money(private val amount: BigDecimal, private val currency: Currency)
     * @param roundingMode 丸めモード
     * @return 指定した割合の金額
     */
-  def applying(ratio: Ratio,
-               roundingMode: BigDecimal.RoundingMode.Value): Money =
+  def applying(ratio: Ratio, roundingMode: BigDecimal.RoundingMode.Value): Money =
     applying(ratio, currency.getDefaultFractionDigits, roundingMode)
 
   /**
@@ -162,8 +159,7 @@ class Money(private val amount: BigDecimal, private val currency: Currency)
     * @param roundingMode 丸めモード
     * @return 金額
     */
-  def dividedBy(divisor: BigDecimal,
-                roundingMode: BigDecimal.RoundingMode.Value): Money = {
+  def dividedBy(divisor: BigDecimal, roundingMode: BigDecimal.RoundingMode.Value): Money = {
     val newAmount =
       amount.bigDecimal.divide(divisor.bigDecimal, roundingMode.id)
     Money(BigDecimal(newAmount), currency)
@@ -176,8 +172,7 @@ class Money(private val amount: BigDecimal, private val currency: Currency)
     * @param roundingMode 丸めモード
     * @return 金額
     */
-  def dividedBy(divisor: Double,
-                roundingMode: BigDecimal.RoundingMode.Value): Money =
+  def dividedBy(divisor: Double, roundingMode: BigDecimal.RoundingMode.Value): Money =
     dividedBy(BigDecimal(divisor), roundingMode)
 
   /**
@@ -309,8 +304,7 @@ class Money(private val amount: BigDecimal, private val currency: Currency)
     * @param roundingMode 丸めモード
     * @return 掛けた金額
     */
-  def times(factor: BigDecimal,
-            roundingMode: BigDecimal.RoundingMode.Value): Money =
+  def times(factor: BigDecimal, roundingMode: BigDecimal.RoundingMode.Value): Money =
     Money.adjustBy(amount * factor, currency, roundingMode)
 
   /**
@@ -331,8 +325,7 @@ class Money(private val amount: BigDecimal, private val currency: Currency)
     * @param roundingMode 丸めモード
     * @return 掛けた金額
     */
-  def times(amount: Double,
-            roundingMode: BigDecimal.RoundingMode.Value): Money =
+  def times(amount: Double, roundingMode: BigDecimal.RoundingMode.Value): Money =
     times(BigDecimal(amount), roundingMode)
 
   /**
