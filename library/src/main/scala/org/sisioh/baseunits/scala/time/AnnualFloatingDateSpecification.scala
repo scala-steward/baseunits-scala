@@ -40,7 +40,7 @@ class AnnualFloatingDateSpecification private[time] (
   require(1 <= occurrence && occurrence <= 5)
 
   override def isSatisfiedBy(date: CalendarDate): Boolean =
-    ofYear(date.asCalendarMonth.year).equals(date)
+    ofYear(date.asCalendarMonth.breachEncapsulationOfYear).equals(date)
 
   override def ofYear(year: Int): CalendarDate = {
     val firstOfMonth    = CalendarDate.from(year, month, 1, zoneId)

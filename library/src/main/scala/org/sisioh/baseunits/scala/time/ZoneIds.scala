@@ -5,10 +5,10 @@ import java.util.TimeZone
 
 object ZoneIds {
 
-  val Default = ZoneId.systemDefault()
+  val Default: ZoneId = ZoneId.systemDefault()
 
-  val GMT = TimeZone.getTimeZone("Universal").toZoneId
+  val GMT: ZoneId = TimeZone.getTimeZone("Universal").toZoneId
 
-  val JST = ZoneId.of("JST", ZoneId.SHORT_IDS)
+  val JST: ZoneId = ZoneId.of("JST", ZoneId.SHORT_IDS)
 
 }

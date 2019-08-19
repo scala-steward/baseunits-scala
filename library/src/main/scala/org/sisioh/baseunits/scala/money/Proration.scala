@@ -104,7 +104,8 @@ object Proration {
     * @return 分割結果
     */
   def proratedOver[T](total: Money, longProportions: Array[T])(
-      implicit ev: T => Number): Array[Money] = {
+      implicit ev: T => Number
+  ): Array[Money] = {
     val proportions = longProportions.map(e => BigDecimal(e.longValue))
     proratedOver(total, proportions)
   }
@@ -156,11 +157,11 @@ object Proration {
     */
   def sum(elements: Array[Money]): Money = {
     require(elements.size > 0)
-    val sum = Money.adjustBy(0, elements(0).currency)
+    val sum = Money.adjustBy(0, elements(0).breachEncapsulationOfCurrency)
     elements.foldLeft(sum)(_.plus(_))
   }
 
   private def defaultScaleForIntermediateCalculations(total: Money) =
-    total.amount.precision + 2
+    total.breachEncapsulationOfAmount.precision + 2
 
 }

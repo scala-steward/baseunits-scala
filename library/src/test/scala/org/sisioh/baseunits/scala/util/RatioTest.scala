@@ -101,9 +101,13 @@ class RatioTest extends AssertionsForJUnit {
   @Test
   def test03_FractionalRatio() {
     val ratio = Ratio(BigDecimal("3.14159"))
-    assert(ratio.denominator == BigDecimal(1))
-    assert(ratio.numerator == BigDecimal("3.14159"))
-    assert(ratio.decimalValue(5, BigDecimal.RoundingMode.UNNECESSARY) == BigDecimal("3.14159"))
+    assert(ratio.breachEncapsulationOfDenominator == BigDecimal(1))
+    assert(ratio.breachEncapsulationOfNumerator == BigDecimal("3.14159"))
+    assert(
+      ratio.decimalValue(5, BigDecimal.RoundingMode.UNNECESSARY) == BigDecimal(
+        "3.14159"
+      )
+    )
   }
 
   /**

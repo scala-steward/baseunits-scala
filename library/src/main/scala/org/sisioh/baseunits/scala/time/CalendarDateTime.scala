@@ -33,10 +33,8 @@ import java.util.TimeZone
   * @param date 年月日
   * @param time 時分
   */
-class CalendarDateTime private[time] (
-    val date: CalendarDate,
-    val time: TimeOfDay
-) extends Ordered[CalendarDateTime]
+class CalendarDateTime private[time] (private val date: CalendarDate, private val time: TimeOfDay)
+    extends Ordered[CalendarDateTime]
     with Serializable {
 
   /**
@@ -76,7 +74,6 @@ class CalendarDateTime private[time] (
     *
     * @return 年月日
     */
-  @deprecated("Use date property instead", "0.1.18")
   val breachEncapsulationOfDate: CalendarDate = date
 
   /**
@@ -86,7 +83,6 @@ class CalendarDateTime private[time] (
     *
     * @return 時分
     */
-  @deprecated("Use time property instead", "0.1.18")
   val breachEncapsulationOfTime: TimeOfDay = time
 
   override def compare(other: CalendarDateTime): Int = {
@@ -145,7 +141,10 @@ class CalendarDateTime private[time] (
     * @param timeZone タイムゾーン
     * @return 整形済み時間文字列
     */
-  @deprecated("Use toString(pattern: String, zoneId: ZoneId) method instead", "0.1.18")
+  @deprecated(
+    "Use toString(pattern: String, zoneId: ZoneId) method instead",
+    "0.1.18"
+  )
   def toString(pattern: String, timeZone: TimeZone): String =
     toString(pattern, timeZone.toZoneId)
 
@@ -189,7 +188,9 @@ object CalendarDateTime {
     * @param calendarDateTime [[CalendarDateTime]]
     * @return `Option[(CalendarDate,TimeOfDay)]`
     */
-  def unapply(calendarDateTime: CalendarDateTime): Option[(CalendarDate, TimeOfDay)] =
+  def unapply(
+      calendarDateTime: CalendarDateTime
+  ): Option[(CalendarDate, TimeOfDay)] =
     Some(calendarDateTime.date, calendarDateTime.time)
 
   /**
@@ -252,15 +253,18 @@ object CalendarDateTime {
     */
   @deprecated(
     "Use from(year: Int, month: Int, day: Int, hour: Int, minute: Int, zoneId: ZoneId) method instead",
-    "0.1.18")
+    "0.1.18"
+  )
   def from(year: Int,
            month: Int,
            day: Int,
            hour: Int,
            minute: Int,
            timeZone: TimeZone): CalendarDateTime =
-    new CalendarDateTime(CalendarDate.from(year, month, day, timeZone.toZoneId),
-                         TimeOfDay.from(hour, minute))
+    new CalendarDateTime(
+      CalendarDate.from(year, month, day, timeZone.toZoneId),
+      TimeOfDay.from(hour, minute)
+    )
 
   /**
     * 指定した年月日を時分表す、[[CalendarDateTime]]のインスタンスを生成する。
@@ -282,7 +286,10 @@ object CalendarDateTime {
            hour: Int,
            minute: Int,
            zoneId: ZoneId): CalendarDateTime =
-    new CalendarDateTime(CalendarDate.from(year, month, day, zoneId), TimeOfDay.from(hour, minute))
+    new CalendarDateTime(
+      CalendarDate.from(year, month, day, zoneId),
+      TimeOfDay.from(hour, minute)
+    )
 
   /**
     * 指定した年月日時分を表す、[[CalendarDate]]のインスタンスを生成する。
@@ -293,8 +300,10 @@ object CalendarDateTime {
     * @return [[CalendarDateTime]]
     * @throws ParseException 文字列の解析に失敗した場合
     */
-  @deprecated("Use parse(dateTimeString: String, pattern: String, zoneId: ZoneId) method instead",
-              "0.1.18")
+  @deprecated(
+    "Use parse(dateTimeString: String, pattern: String, zoneId: ZoneId) method instead",
+    "0.1.18"
+  )
   def parse(dateTimeString: String, pattern: String, timeZone: TimeZone): CalendarDateTime =
     parse(dateTimeString, pattern, timeZone.toZoneId)
 
@@ -312,7 +321,10 @@ object CalendarDateTime {
             zoneId: ZoneId = ZoneIds.Default): CalendarDateTime = {
     //Any timezone works, as long as the same one is used throughout.
     val point = TimePoint.parse(dateTimeString, pattern, zoneId)
-    CalendarDateTime.from(point.asCalendarDate(zoneId), point.asTimeOfDay(zoneId))
+    CalendarDateTime.from(
+      point.asCalendarDate(zoneId),
+      point.asTimeOfDay(zoneId)
+    )
   }
 
 }

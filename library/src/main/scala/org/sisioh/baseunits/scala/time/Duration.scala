@@ -33,10 +33,8 @@ import org.sisioh.baseunits.scala.util.Ratio
   * @param quantity 時間の長さ
   * @param unit     時間の単位
   */
-class Duration private[time] (
-    val quantity: Long,
-    val unit: TimeUnit
-) extends Ordered[Duration]
+class Duration private[time] (private val quantity: Long, private val unit: TimeUnit)
+    extends Ordered[Duration]
     with Serializable {
 
   require(quantity >= 0, "Quantity: " + quantity + " must be zero or positive")
@@ -61,7 +59,10 @@ class Duration private[time] (
     * @param timeZone タイムゾーン
     * @return このオブジェクトが表現する長さの時間が経過した未来の日付
     */
-  @deprecated("Use addedTo(day: CalendarDate, zoneId: ZoneId) method instead", "0.1.18")
+  @deprecated(
+    "Use addedTo(day: CalendarDate, zoneId: ZoneId) method instead",
+    "0.1.18"
+  )
   def addedTo(day: CalendarDate, timeZone: TimeZone): CalendarDate =
     addedTo(day, timeZone.toZoneId)
 
@@ -88,7 +89,10 @@ class Duration private[time] (
     * @param month 元となる年月
     * @return このオブジェクトが表現する長さの時間が経過した未来の年月
     */
-  @deprecated("Use addedTo(month: CalendarYearMonth, zoneId: ZoneId) method instead", "0.1.18")
+  @deprecated(
+    "Use addedTo(month: CalendarYearMonth, zoneId: ZoneId) method instead",
+    "0.1.18"
+  )
   def addedTo(month: CalendarYearMonth, timeZone: TimeZone): CalendarYearMonth =
     addedTo(month, timeZone.toZoneId)
 
@@ -124,8 +128,7 @@ class Duration private[time] (
     *
     * @return 量
     */
-  @deprecated("Use quantity property instead", "0.1.18")
-  val breachEncapsulationOfQuantity = quantity
+  val breachEncapsulationOfQuantity: Long = quantity
 
   /**
     * このオブジェクトの`unit`フィールド（単位）を返す。
@@ -134,8 +137,7 @@ class Duration private[time] (
     *
     * @return 単位
     */
-  @deprecated("Use unit property instead", "0.1.18")
-  val breachEncapsulationOfUnit = unit
+  val breachEncapsulationOfUnit: TimeUnit = unit
 
   /**
     * 時間量同士の比較を行う。
@@ -151,7 +153,9 @@ class Duration private[time] (
     */
   override def compare(other: Duration): Int = {
     if (!other.unit.isConvertibleTo(unit) && quantity != 0 && other.quantity != 0) {
-      throw new ClassCastException(other.toString() + " is not convertible to: " + toString())
+      throw new ClassCastException(
+        other.toString() + " is not convertible to: " + toString()
+      )
     }
     val difference = inBaseUnits - other.inBaseUnits
     if (difference > 0) 1
@@ -194,7 +198,10 @@ class Duration private[time] (
     checkConvertible(other)
     checkGreaterThanOrEqualTo(other)
     val newQuantity = inBaseUnits - other.inBaseUnits
-    new Duration(newQuantity, if (other.quantity == 0) unit.baseUnit else other.unit.baseUnit)
+    new Duration(
+      newQuantity,
+      if (other.quantity == 0) unit.baseUnit else other.unit.baseUnit
+    )
   }
 
   /**
@@ -220,7 +227,10 @@ class Duration private[time] (
   def plus(other: Duration): Duration = {
     checkConvertible(other)
     val newQuantity = inBaseUnits + other.inBaseUnits
-    new Duration(newQuantity, if (other.quantity == 0) unit.baseUnit else other.unit.baseUnit)
+    new Duration(
+      newQuantity,
+      if (other.quantity == 0) unit.baseUnit else other.unit.baseUnit
+    )
   }
 
   /**
@@ -242,7 +252,9 @@ class Duration private[time] (
     * @param start 開始日時（下側限界値）. `Limitless[CalendarDate]`の場合は、限界がないことを表す
     * @return 期間
     */
-  def startingFromCalendarDate(start: LimitValue[CalendarDate]): CalendarInterval =
+  def startingFromCalendarDate(
+      start: LimitValue[CalendarDate]
+  ): CalendarInterval =
     CalendarInterval.startingFrom(start, this)
 
   /**
@@ -264,7 +276,10 @@ class Duration private[time] (
     * @param day 元となる日付
     * @return このオブジェクトが表現する長さのを引いた、過去の日付
     */
-  @deprecated("Use subtractedFrom(day: CalendarDate, zoneId: ZoneId) method instead", "0.1.18")
+  @deprecated(
+    "Use subtractedFrom(day: CalendarDate, zoneId: ZoneId) method instead",
+    "0.1.18"
+  )
   def subtractedFrom(day: CalendarDate, timeZone: TimeZone): CalendarDate =
     subtractedFrom(day, timeZone.toZoneId)
 
@@ -315,22 +330,35 @@ class Duration private[time] (
       calendar.setTimeInMillis(calendar.getTimeInMillis + amount)
     } else {
       checkAmountValid(amount)
-      calendar.add(unit.javaCalendarConstantForBaseType, amount.asInstanceOf[Int])
+      calendar.add(
+        unit.javaCalendarConstantForBaseType,
+        amount.asInstanceOf[Int]
+      )
     }
   }
 
-  private[time] def addAmountToZonedDateTime(amount: Long,
-                                             zonedDateTime: ZonedDateTime): ZonedDateTime = {
+  private[time] def addAmountToZonedDateTime(
+      amount: Long,
+      zonedDateTime: ZonedDateTime
+  ): ZonedDateTime = {
     if (unit.isConvertibleToMilliseconds) {
-      ZonedDateTime.ofInstant(Instant.ofEpochMilli(zonedDateTime.toInstant.toEpochMilli + amount),
-                              zonedDateTime.getZone)
+      ZonedDateTime.ofInstant(
+        Instant.ofEpochMilli(zonedDateTime.toInstant.toEpochMilli + amount),
+        zonedDateTime.getZone
+      )
     } else {
       checkAmountValid(amount)
-      zonedDateTime.plus(amount.asInstanceOf[Int], unit.javaZonedDateTImeConstantForBaseType)
+      zonedDateTime.plus(
+        amount.asInstanceOf[Int],
+        unit.javaZonedDateTImeConstantForBaseType
+      )
     }
   }
 
-  @deprecated("Use addAmountToTimePoint(amount: Long, point: TimePoint) method instead", "0.1.18")
+  @deprecated(
+    "Use addAmountToTimePoint(amount: Long, point: TimePoint) method instead",
+    "0.1.18"
+  )
   private[time] def addAmountToTimePoint(amount: Long,
                                          point: TimePoint,
                                          timeZone: TimeZone): TimePoint = {
@@ -359,12 +387,17 @@ class Duration private[time] (
   private[time] def subtractAmountFromCalendar(amount: Long, calendar: Calendar): Unit =
     addAmountToCalendar(-1 * amount, calendar)
 
-  private[time] def subtractAmountFromZonedDateTime(amount: Long,
-                                                    zonedDateTime: ZonedDateTime): ZonedDateTime =
+  private[time] def subtractAmountFromZonedDateTime(
+      amount: Long,
+      zonedDateTime: ZonedDateTime
+  ): ZonedDateTime =
     addAmountToZonedDateTime(-1 * amount, zonedDateTime)
 
   private def checkAmountValid(amount: Long) {
-    require(amount >= Int.MinValue && amount <= Int.MaxValue, amount + " is not valid")
+    require(
+      amount >= Int.MinValue && amount <= Int.MaxValue,
+      amount + " is not valid"
+    )
   }
 
   private def checkConvertible(other: Duration) {

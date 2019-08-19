@@ -30,10 +30,7 @@ import org.sisioh.baseunits.scala.time.{Duration, TimeRate}
   * @param rate 単位時間あたりの数量
   * @param currency 通貨単位
   */
-class MoneyTimeRate(
-    private val rate: TimeRate,
-    private val currency: Currency
-) {
+class MoneyTimeRate(private val rate: TimeRate, private val currency: Currency) {
 
   /**
     * インスタンスを生成する。
@@ -42,7 +39,10 @@ class MoneyTimeRate(
     * @param duration 時間量
     */
   def this(money: Money, duration: Duration) =
-    this(TimeRate(money.amount, duration), money.currency)
+    this(
+      TimeRate(money.breachEncapsulationOfAmount, duration),
+      money.breachEncapsulationOfCurrency
+    )
 
   /**
     * このオブジェクトの`currency`フィールド（通貨単位）を返す。
@@ -51,7 +51,7 @@ class MoneyTimeRate(
     *
     * @return 通貨単位
     */
-  val breachEncapsulationOfCurrency = currency
+  val breachEncapsulationOfCurrency: Currency = currency
 
   /**
     * このオブジェクトの`rate`フィールド（単位時間当たりの数量）を返す。
@@ -60,7 +60,7 @@ class MoneyTimeRate(
     *
     * @return 単位時間あたりの数量
     */
-  val breachEncapsulationOfRate = rate
+  val breachEncapsulationOfRate: TimeRate = rate
 
   override def equals(obj: Any): Boolean = obj match {
     case that: MoneyTimeRate => currency == that.currency && rate == that.rate

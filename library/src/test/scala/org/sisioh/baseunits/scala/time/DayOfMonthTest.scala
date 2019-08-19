@@ -34,7 +34,7 @@ class DayOfMonthTest extends AssertionsForJUnit {
   @Test
   def test01_create {
     for (i <- 1 until 31) {
-      assert(DayOfMonth(i).value == (i))
+      assert(DayOfMonth(i).breachEncapsulationOfValue == (i))
     }
 
     try {

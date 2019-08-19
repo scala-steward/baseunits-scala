@@ -24,13 +24,19 @@ package org.sisioh.baseunits.scala.time
   * @author j5ik2o
   * @param day [[org.sisioh.baseunits.scala.time.DayOfMonth]]
   */
-class MonthlyFixedDateSpecification private[time] (private[time] val day: DayOfMonth)
-    extends MonthlyDateSpecification {
+class MonthlyFixedDateSpecification private[time] (
+    private[time] val day: DayOfMonth
+) extends MonthlyDateSpecification {
 
   override def isSatisfiedBy(date: CalendarDate): Boolean =
     day == date.day
 
   override def ofYearMonth(month: CalendarYearMonth): CalendarDate =
-    CalendarDate.from(month.year, month.month, day, month.zoneId)
+    CalendarDate.from(
+      month.breachEncapsulationOfYear,
+      month.breachEncapsulationOfMonth,
+      day,
+      month.breachEncapsulationOfZoneId
+    )
 
 }

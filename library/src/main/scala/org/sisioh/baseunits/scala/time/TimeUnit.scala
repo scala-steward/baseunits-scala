@@ -33,7 +33,7 @@ final class TimeUnit private[time] (
     private[time] val factor: TimeUnitConversionFactor
 ) extends Ordered[TimeUnit] {
 
-  val name = _name
+  val name: String = _name
 
   /**
     * この単位で表される値を、指定した単位に変換できるかどうかを検証する。
@@ -51,7 +51,9 @@ final class TimeUnit private[time] (
     *
     * @return 変換できる場合は`true`、そうでない場合は`false`
     */
-  lazy val isConvertibleToMilliseconds = isConvertibleTo(TimeUnit.Millisecond)
+  lazy val isConvertibleToMilliseconds: Boolean = isConvertibleTo(
+    TimeUnit.Millisecond
+  )
 
   //  override def toString = valueType.name
 
@@ -151,71 +153,89 @@ object TimeUnit {
   }
 
   /** ミリ秒単位 */
-  val Millisecond = new TimeUnit("millisecond",
-                                 Type.Millisecond,
-                                 Type.Millisecond,
-                                 TimeUnitConversionFactor.Identical)
+  val Millisecond = new TimeUnit(
+    "millisecond",
+    Type.Millisecond,
+    Type.Millisecond,
+    TimeUnitConversionFactor.Identical
+  )
 
   /** 秒単位 */
-  val Second = new TimeUnit("second",
-                            Type.Second,
-                            Type.Millisecond,
-                            TimeUnitConversionFactor.MillisecondsPerSecond)
+  val Second = new TimeUnit(
+    "second",
+    Type.Second,
+    Type.Millisecond,
+    TimeUnitConversionFactor.MillisecondsPerSecond
+  )
 
   /** 分単位 */
-  val Minute = new TimeUnit("minute",
-                            Type.Minute,
-                            Type.Millisecond,
-                            TimeUnitConversionFactor.MillisecondsPerMinute)
+  val Minute = new TimeUnit(
+    "minute",
+    Type.Minute,
+    Type.Millisecond,
+    TimeUnitConversionFactor.MillisecondsPerMinute
+  )
 
   /** 時単位 */
   val Hour =
-    new TimeUnit("hour", Type.Hour, Type.Millisecond, TimeUnitConversionFactor.MillisecondsPerHour)
+    new TimeUnit(
+      "hour",
+      Type.Hour,
+      Type.Millisecond,
+      TimeUnitConversionFactor.MillisecondsPerHour
+    )
 
   /** 日単位 */
   val Day =
-    new TimeUnit("day", Type.Day, Type.Millisecond, TimeUnitConversionFactor.MillisecondsPerDay)
+    new TimeUnit(
+      "day",
+      Type.Day,
+      Type.Millisecond,
+      TimeUnitConversionFactor.MillisecondsPerDay
+    )
 
   /** 週単位 */
   val Week =
-    new TimeUnit("week", Type.Week, Type.Millisecond, TimeUnitConversionFactor.MillisecondsPerWeek)
+    new TimeUnit(
+      "week",
+      Type.Week,
+      Type.Millisecond,
+      TimeUnitConversionFactor.MillisecondsPerWeek
+    )
 
   /** 月単位 */
-  val Month = new TimeUnit("month", Type.Month, Type.Month, TimeUnitConversionFactor.Identical)
+  val Month = new TimeUnit(
+    "month",
+    Type.Month,
+    Type.Month,
+    TimeUnitConversionFactor.Identical
+  )
 
   /** 四半期単位 */
   val Quarter =
-    new TimeUnit("quarter", Type.Quarter, Type.Month, TimeUnitConversionFactor.MonthsPerQuarter)
+    new TimeUnit(
+      "quarter",
+      Type.Quarter,
+      Type.Month,
+      TimeUnitConversionFactor.MonthsPerQuarter
+    )
 
   /** 年単位 */
-  val Year = new TimeUnit("year", Type.Year, Type.Month, TimeUnitConversionFactor.MonthsPerYear)
-
-  private val DescendingMsBased = Seq(
-    Week,
-    Day,
-    Hour,
-    Minute,
-    Second,
-    Millisecond
+  val Year = new TimeUnit(
+    "year",
+    Type.Year,
+    Type.Month,
+    TimeUnitConversionFactor.MonthsPerYear
   )
 
-  private val DescendingMsBasedForDisplay = Seq(
-    Day,
-    Hour,
-    Minute,
-    Second,
-    Millisecond
-  )
+  private val DescendingMsBased =
+    Seq(Week, Day, Hour, Minute, Second, Millisecond)
 
-  private val DescendingMonthBased = Seq(
-    Year,
-    Quarter,
-    Month
-  )
+  private val DescendingMsBasedForDisplay =
+    Seq(Day, Hour, Minute, Second, Millisecond)
 
-  private val DescendingMonthBasedForDisplay = Seq(
-    Year,
-    Month
-  )
+  private val DescendingMonthBased = Seq(Year, Quarter, Month)
+
+  private val DescendingMonthBasedForDisplay = Seq(Year, Month)
 
 }

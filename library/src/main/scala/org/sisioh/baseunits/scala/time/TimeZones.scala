@@ -4,10 +4,10 @@ import java.util.TimeZone
 
 object TimeZones {
 
-  val Default = TimeZone.getDefault
+  val Default: TimeZone = TimeZone.getDefault
 
-  val GMT = TimeZone.getTimeZone("Universal")
+  val GMT: TimeZone = TimeZone.getTimeZone("Universal")
 
-  val JST = TimeZone.getTimeZone("Asia/Tokyo")
+  val JST: TimeZone = TimeZone.getTimeZone("Asia/Tokyo")
 
 }

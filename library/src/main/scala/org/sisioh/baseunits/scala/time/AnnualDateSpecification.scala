@@ -27,25 +27,33 @@ import org.sisioh.baseunits.scala.intervals.Limit
   */
 abstract class AnnualDateSpecification extends DateSpecification {
 
-  override def firstOccurrenceIn(interval: CalendarInterval): Option[CalendarDate] = {
-    val firstTry = ofYear(interval.start.toValue.asCalendarMonth.year)
+  override def firstOccurrenceIn(
+      interval: CalendarInterval
+  ): Option[CalendarDate] = {
+    val firstTry = ofYear(
+      interval.start.toValue.asCalendarMonth.breachEncapsulationOfYear
+    )
     if (interval.includes(Limit(firstTry))) {
       Some(firstTry)
     } else {
-      val secondTry = ofYear(interval.start.toValue.asCalendarMonth.year + 1)
+      val secondTry = ofYear(
+        interval.start.toValue.asCalendarMonth.breachEncapsulationOfYear + 1
+      )
       if (interval.includes(Limit(secondTry))) {
         Some(secondTry)
       } else None
     }
   }
 
-  override def iterateOver(interval: CalendarInterval): Iterator[CalendarDate] = {
+  override def iterateOver(
+      interval: CalendarInterval
+  ): Iterator[CalendarDate] = {
     new Iterator[CalendarDate] {
 
       private var _next = firstOccurrenceIn(interval)
 
       private var year = _next map { o =>
-        o.asCalendarMonth.year
+        o.asCalendarMonth.breachEncapsulationOfYear
       } getOrElse (-1)
 
       override def hasNext: Boolean = _next.isDefined

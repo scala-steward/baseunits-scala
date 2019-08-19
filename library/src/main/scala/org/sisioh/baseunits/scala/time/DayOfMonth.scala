@@ -25,7 +25,9 @@ package org.sisioh.baseunits.scala.time
   *
   * @author j5ik2o
   */
-class DayOfMonth private[time] (val value: Int) extends Ordered[DayOfMonth] with Serializable {
+class DayOfMonth private[time] (private val value: Int)
+    extends Ordered[DayOfMonth]
+    with Serializable {
 
   require(
     value >= DayOfMonth.Min && value <= DayOfMonth.Max,
@@ -40,7 +42,6 @@ class DayOfMonth private[time] (val value: Int) extends Ordered[DayOfMonth] with
     *
     * @return 日をあらわす正数（1〜31）
     */
-  @deprecated("Use value property instead", "0.1.18")
   val breachEncapsulationOfValue = value
 
   override def compare(that: DayOfMonth): Int = value - that.value
@@ -107,7 +108,7 @@ class DayOfMonth private[time] (val value: Int) extends Ordered[DayOfMonth] with
     * @throws IllegalArgumentException 引数`month`の月にこの日が存在しない場合
     */
   def on(month: CalendarYearMonth): CalendarDate =
-    CalendarDate.from(month, this, month.zoneId)
+    CalendarDate.from(month, this, month.breachEncapsulationOfZoneId)
 
   override def toString: String = String.valueOf(value)
 

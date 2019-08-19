@@ -132,7 +132,10 @@ class TimePoint private[time] (val millisecondsFromEpoc: Long)
     */
   @deprecated("Use asCalendarDateTime(zoneId: ZoneId) method instead", "0.1.18")
   def asCalendarDateTime(timeZone: TimeZone): CalendarDateTime =
-    CalendarDateTime.from(asCalendarDate(timeZone.toZoneId), asTimeOfDay(timeZone.toZoneId))
+    CalendarDateTime.from(
+      asCalendarDate(timeZone.toZoneId),
+      asTimeOfDay(timeZone.toZoneId)
+    )
 
   /**
     * このインスタンスが表現する瞬間の、指定したゾーンIDにおける日時を取得する。
@@ -265,7 +268,10 @@ class TimePoint private[time] (val millisecondsFromEpoc: Long)
     * @param timeZone タイムゾーン
     * @return 整形済み時間文字列
     */
-  @deprecated("Use def toString(pattern: String, zoneId: ZoneId) method instead", "0.1.18")
+  @deprecated(
+    "Use def toString(pattern: String, zoneId: ZoneId) method instead",
+    "0.1.18"
+  )
   def toString(pattern: String, timeZone: TimeZone): String =
     toString(pattern, timeZone.toZoneId)
 
@@ -355,9 +361,9 @@ object TimePoint {
          millisecond: Int,
          timeZone: TimeZone): TimePoint = {
     at(
-      yearMonth.year,
-      yearMonth.month.value,
-      date.value,
+      yearMonth.breachEncapsulationOfYear,
+      yearMonth.breachEncapsulationOfMonth.value,
+      date.breachEncapsulationOfValue,
       hour,
       minute,
       second,
@@ -374,9 +380,9 @@ object TimePoint {
          millisecond: Int,
          zoneId: ZoneId): TimePoint = {
     at(
-      yearMonth.year,
-      yearMonth.month.value,
-      date.value,
+      yearMonth.breachEncapsulationOfYear,
+      yearMonth.breachEncapsulationOfMonth.value,
+      date.breachEncapsulationOfValue,
       hour,
       minute,
       second,
@@ -421,7 +427,8 @@ object TimePoint {
     */
   @deprecated(
     "Use at(year: Int, month: Int, date: Int, hour: Int, minute: Int, second: Int, millisecond: Int, zoneId: ZoneId) method instead",
-    "0.1.18")
+    "0.1.18"
+  )
   def at(year: Int,
          month: Int,
          date: Int,
@@ -450,7 +457,16 @@ object TimePoint {
          millisecond: Int,
          zoneId: ZoneId): TimePoint = {
     val zonedDateTime =
-      ZonedDateTime.of(year, month, date, hour, minute, second, millisecond * 1000000, zoneId)
+      ZonedDateTime.of(
+        year,
+        month,
+        date,
+        hour,
+        minute,
+        second,
+        millisecond * 1000000,
+        zoneId
+      )
     from(zonedDateTime)
   }
 
@@ -482,7 +498,8 @@ object TimePoint {
     */
   @deprecated(
     "Use at(year: Int, month: Int, date: Int, hour: Int, minute: Int, second: Int, zoneId: ZoneId) method instead",
-    "0.1.18")
+    "0.1.18"
+  )
   def at(year: Int,
          month: Int,
          date: Int,
@@ -527,7 +544,8 @@ object TimePoint {
     */
   @deprecated(
     "Use at(year: Int, month: Int, date: Int, hour: Int, minute: Int, zoneId: ZoneId) method instead",
-    "0.1.18")
+    "0.1.18"
+  )
   def at(year: Int, month: Int, date: Int, hour: Int, minute: Int, timeZone: TimeZone): TimePoint =
     at(year, month, date, hour, minute, 0, 0, timeZone.toZoneId)
 
@@ -580,7 +598,16 @@ object TimePoint {
          second: Int,
          millisecond: Int,
          timeZone: TimeZone): TimePoint =
-    at(year, month.value, date.value, hour, minute, second, millisecond, timeZone.toZoneId)
+    at(
+      year,
+      month.value,
+      date.breachEncapsulationOfValue,
+      hour,
+      minute,
+      second,
+      millisecond,
+      timeZone.toZoneId
+    )
 
   def at(year: Int,
          month: MonthOfYear,
@@ -590,7 +617,16 @@ object TimePoint {
          second: Int,
          millisecond: Int,
          zoneId: ZoneId): TimePoint =
-    at(year, month.value, date.value, hour, minute, second, millisecond, zoneId)
+    at(
+      year,
+      month.value,
+      date.breachEncapsulationOfValue,
+      hour,
+      minute,
+      second,
+      millisecond,
+      zoneId
+    )
 
   /**
     * デフォルトタイムゾーンにおける、指定した日時を表すインスタンスを取得する。
@@ -615,14 +651,16 @@ object TimePoint {
              minute: Int,
              second: Int,
              millisecond: Int): TimePoint = {
-    at(year,
-       month,
-       date,
-       HourOfDay.convertTo24hour(hour, amPm),
-       minute,
-       second,
-       millisecond,
-       ZoneIds.Default)
+    at(
+      year,
+      month,
+      date,
+      HourOfDay.convertTo24hour(hour, amPm),
+      minute,
+      second,
+      millisecond,
+      ZoneIds.Default
+    )
   }
 
   /**
@@ -654,14 +692,16 @@ object TimePoint {
              second: Int,
              millisecond: Int,
              timeZone: TimeZone): TimePoint =
-    at(year,
-       month,
-       date,
-       HourOfDay.convertTo24hour(hour, amPm),
-       minute,
-       second,
-       millisecond,
-       timeZone.toZoneId)
+    at(
+      year,
+      month,
+      date,
+      HourOfDay.convertTo24hour(hour, amPm),
+      minute,
+      second,
+      millisecond,
+      timeZone.toZoneId
+    )
 
   def at12hr(year: Int,
              month: Int,
@@ -672,14 +712,16 @@ object TimePoint {
              second: Int,
              millisecond: Int,
              zoneId: ZoneId): TimePoint =
-    at(year,
-       month,
-       date,
-       HourOfDay.convertTo24hour(hour, amPm),
-       minute,
-       second,
-       millisecond,
-       zoneId)
+    at(
+      year,
+      month,
+      date,
+      HourOfDay.convertTo24hour(hour, amPm),
+      minute,
+      second,
+      millisecond,
+      zoneId
+    )
 
   /**
     * デフォルトタイムゾーンにおける、指定した日時の午前0時（深夜）を表すインスタンスを取得する。
@@ -697,7 +739,10 @@ object TimePoint {
     * @param timeZone     タイムゾーン
     * @return [[TimePoint]]
     */
-  @deprecated("Use atMidnight(calendarDate: CalendarDate, zoneId: ZoneId) method instead", "0.1.18")
+  @deprecated(
+    "Use atMidnight(calendarDate: CalendarDate, zoneId: ZoneId) method instead",
+    "0.1.18"
+  )
   def atMidnight(calendarDate: CalendarDate, timeZone: TimeZone): TimePoint =
     at(
       calendarDate.asCalendarMonth,
@@ -710,15 +755,7 @@ object TimePoint {
     )
 
   def atMidnight(calendarDate: CalendarDate, zoneId: ZoneId): TimePoint =
-    at(
-      calendarDate.asCalendarMonth,
-      calendarDate.day,
-      0,
-      0,
-      0,
-      0,
-      zoneId
-    )
+    at(calendarDate.asCalendarMonth, calendarDate.day, 0, 0, 0, 0, zoneId)
 
   /**
     * デフォルトタイムゾーンにおける、指定した日付の午前0時（深夜）を表すインスタンスを取得する。
@@ -740,8 +777,10 @@ object TimePoint {
     * @param timeZone タイムゾーン
     * @return [[TimePoint]]
     */
-  @deprecated("Use atMidnight(year: Int, month: Int, date: Int, zoneId: ZoneId) method instead",
-              "0.1.18")
+  @deprecated(
+    "Use atMidnight(year: Int, month: Int, date: Int, zoneId: ZoneId) method instead",
+    "0.1.18"
+  )
   def atMidnight(year: Int, month: Int, date: Int, timeZone: TimeZone): TimePoint =
     at(year, month, date, 0, 0, 0, 0, timeZone.toZoneId)
 
@@ -775,13 +814,31 @@ object TimePoint {
     * @param timeZone タイムゾーン
     * @return [[TimePoint]]
     */
-  @deprecated("Use from(date: CalendarDate, time: TimeOfDay, zoneId: ZoneId) method instead",
-              "0.1.18")
+  @deprecated(
+    "Use from(date: CalendarDate, time: TimeOfDay, zoneId: ZoneId) method instead",
+    "0.1.18"
+  )
   def from(date: CalendarDate, time: TimeOfDay, timeZone: TimeZone): TimePoint =
-    at(date.asCalendarMonth, date.day, time.hour.value, time.minute.value, 0, 0, timeZone.toZoneId)
+    at(
+      date.asCalendarMonth,
+      date.day,
+      time.breachEncapsulationOfHour.breachEncapsulationOfValue,
+      time.breachEncapsulationOfMinute.breachEncapsulationOfValue,
+      0,
+      0,
+      timeZone.toZoneId
+    )
 
   def from(date: CalendarDate, time: TimeOfDay, zoneId: ZoneId): TimePoint =
-    at(date.asCalendarMonth, date.day, time.hour.value, time.minute.value, 0, 0, zoneId)
+    at(
+      date.asCalendarMonth,
+      date.day,
+      time.breachEncapsulationOfHour.breachEncapsulationOfValue,
+      time.breachEncapsulationOfMinute.breachEncapsulationOfValue,
+      0,
+      0,
+      zoneId
+    )
 
   /**
     * [[java.util.Date]]を[[TimePoint]]に変換する。
@@ -833,8 +890,10 @@ object TimePoint {
     * @return [[TimePoint]]
     * @throws ParseException 文字列の解析に失敗した場合
     */
-  @deprecated("Use parse(dateTimeString: String, pattern: String, zoneId: ZoneId) method instead",
-              "0.1.18")
+  @deprecated(
+    "Use parse(dateTimeString: String, pattern: String, zoneId: ZoneId) method instead",
+    "0.1.18"
+  )
   def parse(dateTimeString: String, pattern: String, timeZone: TimeZone): TimePoint =
     parse(dateTimeString, pattern, timeZone.toZoneId)
 
