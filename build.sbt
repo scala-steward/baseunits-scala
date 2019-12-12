@@ -37,7 +37,7 @@ val commonSettings = Seq(
     "junit"         % "junit"           % "4.8.1" % "test",
     "org.scalactic" %% "scalactic"      % "3.0.1",
     "org.scalatest" %% "scalatest"      % "3.0.1" % "test",
-    "com.novocode"  % "junit-interface" % "0.8" % "test->default",
+    "com.novocode"  % "junit-interface" % "0.11" % "test->default",
     "org.mockito"   % "mockito-core"    % "1.9.5" % "test",
     "commons-io"    % "commons-io"      % "2.4"
   ),
