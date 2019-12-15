@@ -38,7 +38,7 @@ val commonSettings = Seq(
     "org.scalactic" %% "scalactic"      % "3.0.8",
     "org.scalatest" %% "scalatest"      % "3.0.8" % "test",
     "com.novocode"  % "junit-interface" % "0.8" % "test->default",
-    "org.mockito"   % "mockito-core"    % "1.9.5" % "test",
+    "org.mockito"   % "mockito-core"    % "1.10.19" % "test",
     "commons-io"    % "commons-io"      % "2.4"
   ),
   publishMavenStyle := true,
