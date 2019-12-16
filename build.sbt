@@ -34,11 +34,11 @@ val commonSettings = Seq(
     "Artima Maven Repository" at "http://repo.artima.com/releases"
   ),
   libraryDependencies ++= Seq(
-    "junit"         % "junit"           % "4.8.2" % "test",
-    "org.scalactic" %% "scalactic"      % "3.0.1",
-    "org.scalatest" %% "scalatest"      % "3.0.1" % "test",
+    "junit"         % "junit"           % "4.8.1" % "test",
+    "org.scalactic" %% "scalactic"      % "3.0.8",
+    "org.scalatest" %% "scalatest"      % "3.0.8" % "test",
     "com.novocode"  % "junit-interface" % "0.8" % "test->default",
-    "org.mockito"   % "mockito-core"    % "1.9.5" % "test",
+    "org.mockito"   % "mockito-core"    % "1.10.19" % "test",
     "commons-io"    % "commons-io"      % "2.4"
   ),
   publishMavenStyle := true,
