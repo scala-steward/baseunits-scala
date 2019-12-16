@@ -35,7 +35,7 @@ val commonSettings = Seq(
   ),
   libraryDependencies ++= Seq(
     "junit"         % "junit"           % "4.8.1" % "test",
-    "org.scalactic" %% "scalactic"      % "3.0.8",
+    "org.scalactic" %% "scalactic"      % "3.1.0",
     "org.scalatest" %% "scalatest"      % "3.0.8" % "test",
     "com.novocode"  % "junit-interface" % "0.8" % "test->default",
     "org.mockito"   % "mockito-core"    % "1.10.19" % "test",
