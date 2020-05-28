@@ -39,7 +39,7 @@ val commonSettings = Seq(
     "org.scalatest" %% "scalatest"      % "3.0.8" % "test",
     "com.novocode"  % "junit-interface" % "0.8" % "test->default",
     "org.mockito"   % "mockito-core"    % "3.2.0" % "test",
-    "commons-io"    % "commons-io"      % "2.6"
+    "commons-io"    % "commons-io"      % "2.7"
   ),
   publishMavenStyle := true,
   publishArtifact in Test := false,
